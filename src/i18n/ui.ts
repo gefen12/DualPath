@@ -16,7 +16,6 @@ export const dirs: Record<Lang, 'ltr' | 'rtl'> = {
 // Hebrew strings still need review by the Hebrew translator (open question).
 export const ui = {
   en: {
-    'site.name': 'DualPath',
     'site.tagline': 'כסף ומיסים לאמריקאים בישראל',
     'site.taglineLang': 'he',
     'site.description':
@@ -37,7 +36,6 @@ export const ui = {
     'footer.fullDisclaimer': 'Full disclaimer',
   },
   he: {
-    'site.name': 'DualPath',
     'site.tagline': 'Money and taxes for Americans in Israel',
     'site.taglineLang': 'en',
     'site.description':

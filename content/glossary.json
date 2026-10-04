@@ -1,0 +1,205 @@
+[
+  {
+    "id": "fbar",
+    "en": "FBAR (FinCEN 114)",
+    "he": "דיווח על חשבונות בחו״ל",
+    "category": "tax",
+    "definition": "Yearly report of non-US accounts when they total over $10,000 at any point. Due April 15, auto-extended to October 15.",
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "fbar-fatca/fbar-reporting"
+  },
+  {
+    "id": "fatca",
+    "en": "FATCA (Form 8938)",
+    "he": "דיווח FATCA",
+    "category": "tax",
+    "definition": "Second report of foreign assets, with the tax return. Abroad: from $200,000 at year end (single).",
+    "definitionHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "feie",
+    "en": "Foreign Earned Income Exclusion (FEIE)",
+    "he": "החרגת הכנסה מעבודה בחו״ל",
+    "category": "tax",
+    "definition": "Removes foreign salary from US tax, up to $132,900 for 2026. Can reduce the refundable child tax credit.",
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "us-taxes/feie-or-foreign-tax-credit"
+  },
+  {
+    "id": "foreign-tax-credit",
+    "en": "Foreign Tax Credit",
+    "he": "זיכוי מס זר",
+    "category": "tax",
+    "definition": "Counts Israeli income tax paid against US tax.",
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "us-taxes/feie-or-foreign-tax-credit"
+  },
+  {
+    "id": "pfic",
+    "en": "PFIC",
+    "he": "חברת השקעות פסיבית זרה",
+    "category": "investing",
+    "definition": "US tax label for most non-US funds; taxed harshly, reported on Form 8621.",
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "form-8621",
+    "en": "Form 8621",
+    "he": "טופס 8621",
+    "category": "tax",
+    "definition": "US form for each PFIC held or sold.",
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "israeli-annual-return",
+    "en": "Israeli annual tax return",
+    "he": "דוח שנתי למס הכנסה",
+    "category": "tax",
+    "definition": "Not needed by most salaried workers; required in some cases, e.g. a foreign broker.",
+    "definitionHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "bituach-leumi",
+    "en": "Bituach Leumi",
+    "he": "ביטוח לאומי",
+    "category": "tax",
+    "definition": "Israel's National Insurance: social security and health tax from salary.",
+    "definitionHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "new-immigrant",
+    "en": "New immigrant / veteran returning resident",
+    "he": "עולה חדש / תושב חוזר ותיק",
+    "category": "tax",
+    "definition": "10-year Israeli exemption on foreign income; from 2026 it must still be reported.",
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "israeli-taxes/new-olim-2026-reporting"
+  },
+  {
+    "id": "keren-hishtalmut",
+    "en": "Keren hishtalmut",
+    "he": "קרן השתלמות",
+    "category": "accounts",
+    "definition": "Tax-advantaged savings from you and your employer; US treatment debated.",
+    "definitionHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "pension-fund",
+    "en": "Pension fund",
+    "he": "קרן פנסיה",
+    "category": "accounts",
+    "definition": "Mandatory retirement savings through your employer.",
+    "definitionHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "kupat-gemel-lehashkaa",
+    "en": "Kupat gemel l'hashkaa",
+    "he": "קופת גמל להשקעה",
+    "category": "investing",
+    "definition": "Liquid Israeli investment fund with tax perks; usually a PFIC.",
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "tikun-190",
+    "en": "Tikun 190",
+    "he": "תיקון 190",
+    "category": "investing",
+    "definition": "Tax-deferred account from age 60; pooled, so PFIC risk.",
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "child-savings-plan",
+    "en": "Child savings plan",
+    "he": "חיסכון לכל ילד",
+    "category": "family",
+    "definition": "Monthly government savings per child; bank account or kupat gemel track.",
+    "definitionHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "crba",
+    "en": "Report of Birth Abroad (CRBA)",
+    "he": "דיווח על לידה בחו״ל",
+    "category": "family",
+    "definition": "Records a child born in Israel as a US citizen; first step before passport and SSN.",
+    "definitionHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "ssn",
+    "en": "Social Security number (SSN)",
+    "he": "מספר ביטוח לאומי אמריקאי",
+    "category": "family",
+    "definition": "US ID number; a child needs one for the child tax credit.",
+    "definitionHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "etf",
+    "en": "ETF",
+    "he": "קרן סל",
+    "category": "investing",
+    "definition": "Exchange-traded fund. Israeli ones are PFICs; US-listed ones are taxed normally.",
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "mutual-fund",
+    "en": "Mutual fund",
+    "he": "קרן נאמנות",
+    "category": "investing",
+    "definition": "Pooled managed fund; Israeli ones are PFICs.",
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "index-fund",
+    "en": "Index (tracker) fund",
+    "he": "קרן מחקה",
+    "category": "investing",
+    "definition": "Copies an index like the S&P 500 or TA-125; still a PFIC if Israeli.",
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "government-bond",
+    "en": "Government bond",
+    "he": "אג״ח ממשלתי",
+    "category": "investing",
+    "definition": "Shachar (שחר): fixed shekel rate; Galil (גליל): inflation-linked. Fine to buy directly.",
+    "definitionHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "makam",
+    "en": "Makam",
+    "he": "מק״מ",
+    "category": "investing",
+    "definition": "Short-term Bank of Israel bill, up to one year; common for an emergency fund.",
+    "definitionHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "bank-deposit",
+    "en": "Bank deposit",
+    "he": "פיקדון",
+    "category": "accounts",
+    "definition": "Money locked at the bank for a set time and rate.",
+    "definitionHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "foreign-securities",
+    "en": "Foreign securities",
+    "he": "ניירות ערך זרים",
+    "category": "investing",
+    "definition": "Not traded in Tel Aviv; some Israeli brokers block US citizens from them.",
+    "definitionHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "isin",
+    "en": "Security number / ISIN",
+    "he": "מספר נייר",
+    "category": "investing",
+    "definition": "A security's ID. ISIN starting IL = Israeli, US = American, IE = Irish.",
+    "definitionHe": "[HEBREW TEXT]"
+  }
+]

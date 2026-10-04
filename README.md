@@ -20,7 +20,38 @@ Built with Astro + TypeScript, React islands, Tailwind CSS and MDX. It's a stati
 - English lives at `/`, Hebrew at `/he/`. Every page has a matching page in the other language.
 - Hebrew pages render with `lang="he" dir="rtl"`. Use Tailwind's logical utilities
   (`ms-`, `me-`, `ps-`, `pe-`, `start-`, `end-`, `text-start`) and never `ml-`/`mr-`/`left-`/`right-`.
-- Interface strings live in `src/i18n/ui.ts`. Tax content goes in `/content`, which arrives in Step 2.
+- Interface strings live in `src/i18n/ui.ts`. Tax content lives in `/content`, never in code.
+
+## Content
+
+Everything a reviewer edits is in `/content`:
+
+```
+content/
+  site.json          site name, reviewer, last-reviewed date, contact email
+  modules.json       the 7 modules
+  lessons/en/<module>/<lesson>.mdx
+  lessons/he/<module>/<lesson>.mdx
+  products.json      fund checker
+  glossary.json
+  deadlines.json     recurring yearly dates (month + day)
+  quiz.json          questions and the rules that build a learning path
+```
+
+- Schemas are in `src/lib/schemas.ts`. A missing field, an unknown verdict or a bad
+  date fails the build, and so does a broken link between files: `tests/content.test.ts`
+  runs as part of `npm run build`.
+- **Adding a lesson:** create `lessons/en/<module>/<slug>.mdx` and the same path under
+  `lessons/he/`. Start with `status: coming-soon` (only `title`, `titleHe`, `module`
+  and `order` are needed). A `published` lesson also needs `minutes`, `summary`,
+  `lastReviewed`, `reviewer` and at least one source.
+- Lessons and other files link to a lesson as `"<module>/<slug>"`, e.g. `"investing/israeli-funds-trap"`.
+- In lesson bodies you can use `<TermChip he en>`, `<Callout type="warning|info">`,
+  `<VerdictTable ids={[...product ids]}>` and `<Checklist items={[...]}>`.
+- The build warns when a published lesson's `lastReviewed` is more than 12 months old.
+- Placeholders such as `[CPA NAME]`, `[DATE]` and `[HEBREW TEXT]` stay visible on the
+  site until someone fills them in. `grep -rn "\[HEBREW TEXT\]" content` lists the
+  Hebrew text still to write.
 
 ## Design tokens
 

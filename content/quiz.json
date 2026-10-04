@@ -1,0 +1,122 @@
+{
+  "questions": [
+    {
+      "id": "moved",
+      "label": "When did you start living in Israel?",
+      "labelHe": "[HEBREW TEXT]",
+      "answers": [
+        {
+          "id": "born",
+          "label": "I was born here",
+          "labelHe": "[HEBREW TEXT]"
+        },
+        {
+          "id": "before-2026",
+          "label": "Before 2026",
+          "labelHe": "[HEBREW TEXT]"
+        },
+        {
+          "id": "2026-or-later",
+          "label": "2026 or later",
+          "labelHe": "[HEBREW TEXT]"
+        }
+      ]
+    },
+    {
+      "id": "filed",
+      "label": "Have you filed US tax returns?",
+      "labelHe": "[HEBREW TEXT]",
+      "answers": [
+        {
+          "id": "every-year",
+          "label": "Yes, every year",
+          "labelHe": "[HEBREW TEXT]"
+        },
+        {
+          "id": "some-years",
+          "label": "Some years",
+          "labelHe": "[HEBREW TEXT]"
+        },
+        {
+          "id": "never",
+          "label": "Never",
+          "labelHe": "[HEBREW TEXT]"
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "label": "How do you earn money?",
+      "labelHe": "[HEBREW TEXT]",
+      "answers": [
+        {
+          "id": "salaried",
+          "label": "Salaried",
+          "labelHe": "[HEBREW TEXT]"
+        },
+        {
+          "id": "self-employed",
+          "label": "Self-employed (Atzmai)",
+          "labelHe": "[HEBREW TEXT]"
+        },
+        {
+          "id": "student-soldier",
+          "label": "Student / soldier",
+          "labelHe": "[HEBREW TEXT]"
+        }
+      ]
+    }
+  ],
+  "path": [
+    {
+      "lesson": "basics/yearly-to-do-list"
+    },
+    {
+      "lesson": "basics/streamlined-procedure",
+      "when": {
+        "filed": [
+          "some-years",
+          "never"
+        ]
+      }
+    },
+    {
+      "lesson": "israeli-taxes/new-olim-2026-reporting",
+      "when": {
+        "moved": [
+          "2026-or-later"
+        ]
+      }
+    },
+    {
+      "lesson": "israeli-taxes/self-employed-bituach-leumi",
+      "when": {
+        "work": [
+          "self-employed"
+        ]
+      }
+    },
+    {
+      "lesson": "us-taxes/feie-or-foreign-tax-credit",
+      "when": {
+        "work": [
+          "salaried"
+        ]
+      }
+    },
+    {
+      "lesson": "us-taxes/first-us-return",
+      "when": {
+        "work": [
+          "student-soldier"
+        ]
+      }
+    },
+    {
+      "lesson": "fbar-fatca/fbar-reporting"
+    },
+    {
+      "lesson": "investing/israeli-funds-trap"
+    }
+  ]
+}

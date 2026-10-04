@@ -1,6 +1,9 @@
 ---
-// Temporary page for the Step 1 review. Replaced by the real homepage in Step 5.
+// Temporary page for the Step 1–2 review. Replaced by the real homepage in Step 5.
+import { getCollection } from 'astro:content';
 import { type Lang } from '@/i18n/ui';
+import { parseLessonEntryId } from '@/lib/lessons';
+import { quiz, site } from '@/lib/data';
 
 interface Props {
   lang: Lang;
@@ -8,6 +11,18 @@ interface Props {
 
 const { lang } = Astro.props;
 const he = lang === 'he';
+
+const modules = (await getCollection('modules')).sort((a, b) => a.data.num - b.data.num);
+const lessons = (await getCollection('lessons')).filter((l) => parseLessonEntryId(l.id).lang === lang);
+const counts = [
+  { label: he ? 'מודולים' : 'Modules', value: modules.length },
+  { label: he ? 'שיעורים' : 'Lessons', value: lessons.length },
+  { label: he ? 'שיעורים שפורסמו' : 'Published', value: lessons.filter((l) => l.data.status === 'published').length },
+  { label: he ? 'מוצרים' : 'Products', value: (await getCollection('products')).length },
+  { label: he ? 'מונחים' : 'Glossary terms', value: (await getCollection('glossary')).length },
+  { label: he ? 'מועדים' : 'Deadlines', value: (await getCollection('deadlines')).length },
+  { label: he ? 'שאלות בשאלון' : 'Quiz questions', value: quiz.questions.length },
+];
 
 const swatches = [
   { name: 'navy', hex: '#13233F', cls: 'bg-navy' },
@@ -28,7 +43,7 @@ const verdicts = [
 <section class="mx-auto flex max-w-[1180px] flex-col gap-10 px-4 py-12 sm:px-6 sm:py-16">
   <div class="flex flex-col gap-4">
     <span class="self-start rounded-full bg-blue-tint px-3 py-1.5 text-[13px] font-semibold tracking-wide text-blue uppercase">
-      {he ? 'שלב 1 · תצוגה מקדימה' : 'Step 1 · Setup preview'}
+      {he ? 'שלבים 1–2 · תצוגה מקדימה' : 'Steps 1–2 · Setup preview'}
     </span>
     <h1 class="m-0 text-4xl leading-[1.05] sm:text-[54px]">
       {he ? 'אמריקאים שגרים בישראל: מה לעשות עם הכסף.' : 'For Americans living in Israel: what to do with your money.'}
@@ -40,6 +55,36 @@ const verdicts = [
           : 'Temporary page to review the setup: colors, fonts, header, footer and language switching. The real homepage comes in Step 5.'
       }
     </p>
+  </div>
+
+  <div class="flex flex-col gap-4 rounded-card border border-line bg-card p-6">
+    <h2 class="m-0 text-2xl">{he ? 'תוכן שנטען (שלב 2)' : 'Content loaded (Step 2)'}</h2>
+    <dl class="m-0 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
+      {
+        counts.map((c) => (
+          <div class="flex flex-col gap-0.5 rounded-control bg-page p-3">
+            <dt class="text-sm text-muted">{c.label}</dt>
+            <dd class="m-0 font-display text-2xl font-extrabold">{c.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+    <p class="m-0 text-sm text-muted">
+      {he ? 'סוקר על ידי' : 'Reviewed by'} {site.reviewer} · {he ? 'נבדק לאחרונה' : 'Last reviewed'} {site.lastReviewed}
+    </p>
+    <ol class="m-0 grid list-none gap-2 p-0 sm:grid-cols-2">
+      {
+        modules.map((m) => (
+          <li class="flex gap-3 rounded-control border border-line p-3">
+            <span class="font-display text-xl font-extrabold text-blue">{String(m.data.num).padStart(2, '0')}</span>
+            <span class="flex flex-col">
+              <span class="font-semibold">{he ? m.data.titleHe : m.data.title}</span>
+              <span class="text-sm text-muted">{he ? m.data.descriptionHe : m.data.description}</span>
+            </span>
+          </li>
+        ))
+      }
+    </ol>
   </div>
 
   <div class="grid gap-6 md:grid-cols-2">

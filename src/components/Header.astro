@@ -2,6 +2,7 @@
 import LanguageSwitch from './LanguageSwitch.astro';
 import { type Lang } from '@/i18n/ui';
 import { localizePath, useTranslations } from '@/i18n/utils';
+import { site } from '@/lib/data';
 
 interface Props {
   lang: Lang;
@@ -43,7 +44,7 @@ const current = Astro.url.pathname.replace(/\/$/, '');
         </svg>
       </span>
       <span class="flex min-w-0 flex-col leading-tight">
-        <span class="font-display text-xl font-extrabold" lang="en">{t('site.name')}</span>
+        <span class="font-display text-xl font-extrabold" lang="en">{site.name}</span>
         <span
           class="text-xs text-muted"
           lang={t('site.taglineLang')}

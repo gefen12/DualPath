@@ -1,0 +1,47 @@
+[
+  {
+    "id": "pay-us-tax",
+    "month": 4,
+    "day": 15,
+    "title": "Pay any US tax owed",
+    "titleHe": "[HEBREW TEXT]",
+    "note": "Interest runs from here, even with the extension",
+    "noteHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "israeli-annual-return",
+    "month": 4,
+    "day": 30,
+    "title": "Israeli annual return (if required)",
+    "titleHe": "[HEBREW TEXT]",
+    "note": "Extensions common — confirm yearly",
+    "noteHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "us-return",
+    "month": 6,
+    "day": 15,
+    "title": "US return (Form 1040)",
+    "titleHe": "[HEBREW TEXT]",
+    "note": "Automatic 2-month extension for those abroad",
+    "noteHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "fbar-extended-1040",
+    "month": 10,
+    "day": 15,
+    "title": "FBAR and extended Form 1040",
+    "titleHe": "[HEBREW TEXT]",
+    "note": "FBAR is extended automatically; 1040 needs Form 4868 by June 15",
+    "noteHe": "[HEBREW TEXT]"
+  },
+  {
+    "id": "note-balances",
+    "month": 12,
+    "day": 31,
+    "title": "Note highest account balances",
+    "titleHe": "[HEBREW TEXT]",
+    "note": "Needed for next year's FBAR",
+    "noteHe": "[HEBREW TEXT]"
+  }
+]

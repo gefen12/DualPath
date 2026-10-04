@@ -1,0 +1,385 @@
+[
+  {
+    "id": "us-sp500-etf",
+    "name": "US-listed S&P 500 ETF",
+    "nameHe": "קרן סל אמריקאית על S&P 500",
+    "verdict": "ok",
+    "why": "American fund, taxed normally — not a PFIC",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "Ticker like VOO, SPY, IVV, SPLG; in dollars",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "VOO",
+      "SPY",
+      "IVV",
+      "SPLG",
+      "S&P 500",
+      "SP500",
+      "US ETF",
+      "קרן סל אמריקאית"
+    ],
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "israeli-sp500-fund",
+    "name": "Israeli fund tracking the S&P 500",
+    "nameHe": "קרן סל / מחקה S&P 500",
+    "verdict": "avoid",
+    "why": "Holds US stocks but the fund is Israeli → PFIC",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "Hebrew name, shekels, ISIN starts IL",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "S&P 500",
+      "SP500",
+      "קרן סל",
+      "קרן מחקה",
+      "מחקה S&P 500",
+      "Israeli ETF",
+      "index fund",
+      "tracker"
+    ],
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "irish-sp500-etf",
+    "name": "Irish S&P 500 ETF",
+    "nameHe": "קרן סל אירית (UCITS)",
+    "verdict": "avoid",
+    "why": "Non-US fund → PFIC",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "CSPX, VUAA; ISIN starts IE",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "CSPX",
+      "VUAA",
+      "UCITS",
+      "Irish",
+      "Ireland",
+      "S&P 500",
+      "קרן סל אירית"
+    ],
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "ta125-fund",
+    "name": "Fund tracking the TA-125",
+    "nameHe": "קרן סל / מחקה ת״א 125",
+    "verdict": "avoid",
+    "why": "Israeli fund → PFIC",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "\"ת״א 125\" in name; ISIN starts IL",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "TA-125",
+      "TA125",
+      "Tel Aviv 125",
+      "ת״א 125",
+      "תא 125",
+      "מחקה ת״א 125"
+    ],
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "us-israel-etf",
+    "name": "US-listed Israel ETF",
+    "nameHe": "קרן סל אמריקאית על מניות ישראליות",
+    "verdict": "ok",
+    "why": "Israeli companies through a US fund; not exactly TA-125",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "EIS, ISRA; in dollars",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "EIS",
+      "ISRA",
+      "Israel ETF",
+      "קרן סל אמריקאית"
+    ]
+  },
+  {
+    "id": "israeli-stocks",
+    "name": "Individual Israeli stocks",
+    "nameHe": "מניות בודדות",
+    "verdict": "ok",
+    "why": "Not a fund",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "A single company on TASE",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "stocks",
+      "shares",
+      "TASE",
+      "מניות",
+      "מניה"
+    ]
+  },
+  {
+    "id": "us-stocks",
+    "name": "Individual US stocks",
+    "nameHe": "מניות אמריקאיות",
+    "verdict": "ok",
+    "why": "Taxed normally",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "A single company on NYSE/NASDAQ",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "stocks",
+      "shares",
+      "NYSE",
+      "NASDAQ",
+      "מניות",
+      "מניה"
+    ]
+  },
+  {
+    "id": "israeli-gov-bonds",
+    "name": "Israeli government bonds",
+    "nameHe": "אג״ח ממשלתי (שחר, גליל)",
+    "verdict": "ok",
+    "why": "A bond bought directly is not a fund",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "Series named שחר or גליל",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "bonds",
+      "government bond",
+      "Shachar",
+      "Galil",
+      "אג״ח",
+      "אגח",
+      "שחר",
+      "גליל"
+    ]
+  },
+  {
+    "id": "makam",
+    "name": "Makam",
+    "nameHe": "מק״מ",
+    "verdict": "ok",
+    "why": "Short-term Bank of Israel bill",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "Listed as מק״מ",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "Makam",
+      "Bank of Israel bill",
+      "T-bill",
+      "מק״מ",
+      "מקמ"
+    ]
+  },
+  {
+    "id": "bank-deposit",
+    "name": "Bank deposit",
+    "nameHe": "פיקדון",
+    "verdict": "ok",
+    "why": "Simple interest income",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "Fixed-term bank deposit",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "deposit",
+      "pikadon",
+      "savings",
+      "פיקדון",
+      "פקדון"
+    ]
+  },
+  {
+    "id": "fx-deposit",
+    "name": "Foreign-currency deposit",
+    "nameHe": "פיקדון מט״ח",
+    "verdict": "ok",
+    "why": "Fine; currency gains have own rules",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "Dollar/euro deposit",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "foreign currency",
+      "dollar deposit",
+      "euro",
+      "FX",
+      "pikadon",
+      "פיקדון מט״ח",
+      "מט״ח",
+      "מטח"
+    ]
+  },
+  {
+    "id": "israeli-bond-fund",
+    "name": "Israeli bond fund",
+    "nameHe": "קרן אג״ח",
+    "verdict": "avoid",
+    "why": "A fund → PFIC; buy bonds directly",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "\"אג״ח\" in fund name",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "bond fund",
+      "קרן אג״ח",
+      "אג״ח",
+      "אגח"
+    ],
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "money-market-fund",
+    "name": "Money-market fund",
+    "nameHe": "קרן כספית",
+    "verdict": "avoid",
+    "why": "Israeli fund → PFIC; use Makam",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "\"כספית\" in name",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "money market",
+      "kaspit",
+      "keren kaspit",
+      "קרן כספית",
+      "כספית"
+    ],
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "israeli-mutual-fund",
+    "name": "Israeli mutual fund",
+    "nameHe": "קרן נאמנות",
+    "verdict": "avoid",
+    "why": "PFIC",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "ISIN starts IL",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "mutual fund",
+      "keren neemanut",
+      "kranot neemanut",
+      "קרן נאמנות",
+      "קרנות נאמנות"
+    ],
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "kupat-gemel-lehashkaa",
+    "name": "Kupat Gemel L'Hashkaa",
+    "nameHe": "קופת גמל להשקעה",
+    "verdict": "avoid",
+    "why": "Pooled wrapper: PFIC, possibly foreign trust",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "From investment houses/insurers",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "kupat gemel",
+      "gemel",
+      "investment provident fund",
+      "קופת גמל",
+      "גמל להשקעה"
+    ],
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "tikun-190",
+    "name": "Tikun 190",
+    "nameHe": "תיקון 190",
+    "verdict": "avoid",
+    "why": "Pooled account for 60+ → PFIC risk",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "Retirement savings track",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "Tikun 190",
+      "Amendment 190",
+      "תיקון 190"
+    ],
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "savings-policy",
+    "name": "Savings policy",
+    "nameHe": "פוליסת חיסכון",
+    "verdict": "avoid",
+    "why": "Pooled tracks → PFIC risk",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "From insurers",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "savings policy",
+      "polisat chisachon",
+      "insurance",
+      "פוליסת חיסכון",
+      "פוליסה"
+    ],
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "managed-portfolio",
+    "name": "Managed portfolio / robo-advisor",
+    "nameHe": "ניהול תיקים / רובו-אדוויזר",
+    "verdict": "avoid",
+    "why": "Usually buys Israeli funds",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "Ask for holdings' ISINs",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "managed portfolio",
+      "portfolio management",
+      "robo-advisor",
+      "robo",
+      "ניהול תיקים",
+      "רובו-אדוויזר",
+      "רובו"
+    ],
+    "lesson": "investing/israeli-funds-trap"
+  },
+  {
+    "id": "keren-hishtalmut",
+    "name": "Keren hishtalmut",
+    "nameHe": "קרן השתלמות",
+    "verdict": "depends",
+    "why": "CPAs disagree on US treatment",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "On your payslip",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "hishtalmut",
+      "keren hishtalmut",
+      "study fund",
+      "קרן השתלמות",
+      "השתלמות"
+    ],
+    "lesson": "investing/pension-keren-hishtalmut"
+  },
+  {
+    "id": "pension-fund",
+    "name": "Pension fund",
+    "nameHe": "קרן פנסיה",
+    "verdict": "depends",
+    "why": "Mandatory; US treatment debated",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "On your payslip",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "pension",
+      "keren pensia",
+      "קרן פנסיה",
+      "פנסיה"
+    ],
+    "lesson": "investing/pension-keren-hishtalmut"
+  },
+  {
+    "id": "child-savings-plan",
+    "name": "Child savings plan",
+    "nameHe": "חיסכון לכל ילד",
+    "verdict": "depends",
+    "why": "Gemel track likely PFIC; bank option often suggested",
+    "whyHe": "[HEBREW TEXT]",
+    "spot": "Via Bituach Leumi",
+    "spotHe": "[HEBREW TEXT]",
+    "keywords": [
+      "child savings",
+      "chisachon lekol yeled",
+      "Chisachon L'Kol Yeled",
+      "חיסכון לכל ילד",
+      "חסכון לכל ילד"
+    ]
+  }
+]
