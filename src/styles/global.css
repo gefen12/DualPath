@@ -75,3 +75,64 @@
     border-radius: 4px;
   }
 }
+
+/* A line in the other language (dir set on the element) still lines up with
+   the page's own text edge: left on English pages, right on Hebrew pages. */
+@layer utilities {
+  html[dir='ltr'] .text-page-start {
+    text-align: left;
+  }
+  html[dir='rtl'] .text-page-start {
+    text-align: right;
+  }
+}
+
+/* Lesson body written in MDX. Components inside it bring their own styles. */
+@layer components {
+  .lesson-body {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #26324a;
+  }
+  /* Block flow (not flex) so adjacent term chips sit on one line. */
+  .lesson-body > * + * {
+    margin-top: 16px;
+  }
+  .lesson-body > astro-island {
+    display: block;
+  }
+  .lesson-body > .term-chip + .term-chip {
+    margin-top: 0;
+  }
+  .lesson-body > h2 {
+    margin-bottom: 0;
+    padding-top: 16px;
+    font-size: 26px;
+    line-height: 1.2;
+    color: var(--color-navy);
+  }
+  .lesson-body > h3 {
+    margin-bottom: 0;
+    padding-top: 8px;
+    font-size: 20px;
+    color: var(--color-navy);
+  }
+  .lesson-body > :is(p, ul, ol) {
+    margin-bottom: 0;
+  }
+  .lesson-body > ul {
+    list-style: disc;
+    padding-inline-start: 1.25em;
+  }
+  .lesson-body > ol {
+    list-style: decimal;
+    padding-inline-start: 1.25em;
+  }
+  .lesson-body > :is(ul, ol) > li + li {
+    margin-top: 8px;
+  }
+  .lesson-body strong {
+    font-weight: 600;
+    color: var(--color-navy);
+  }
+}

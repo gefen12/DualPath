@@ -1,0 +1,50 @@
+---
+// <VerdictTable ids={["us-sp500-etf", …]} /> — rows come from products.json.
+import { getCollection } from 'astro:content';
+import VerdictBadge from '@/components/VerdictBadge.astro';
+import { getLangFromPath, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  ids: string[];
+}
+
+const lang = getLangFromPath(Astro.url.pathname);
+const t = useTranslations(lang);
+const products = new Map((await getCollection('products')).map((p) => [p.id, p.data]));
+const rows = Astro.props.ids.map((id) => {
+  const product = products.get(id);
+  if (!product) throw new Error(`VerdictTable: no product "${id}" in content/products.json`);
+  return product;
+});
+const he = lang === 'he';
+---
+
+<div class="overflow-hidden rounded-card border border-line bg-card">
+  <table class="w-full border-collapse text-start text-[15px] leading-snug max-sm:block">
+    <thead class="bg-[#F0F3F7] text-[13px] font-semibold tracking-wide text-muted uppercase max-sm:sr-only">
+      <tr>
+        <th scope="col" class="px-5 py-3.5 text-start">{t('verdict.product')}</th>
+        <th scope="col" class="px-3 py-3.5 text-start">{t('verdict.forAmericans')}</th>
+        <th scope="col" class="px-5 py-3.5 text-start">{t('verdict.why')}</th>
+      </tr>
+    </thead>
+    <tbody class="max-sm:block">
+      {
+        rows.map((p) => (
+          <tr class="border-t border-[#EEF1F5] align-middle first:border-t-0 sm:first:border-t max-sm:flex max-sm:flex-col max-sm:gap-2 max-sm:px-4 max-sm:py-4">
+            <th scope="row" class="px-5 py-4 text-start font-normal max-sm:p-0">
+              <span class="block font-semibold" lang={he ? 'he' : 'en'}>{he ? p.nameHe : p.name}</span>
+              <span class="text-page-start block text-muted" lang={he ? 'en' : 'he'} dir={he ? 'ltr' : 'rtl'}>
+                {he ? p.name : p.nameHe}
+              </span>
+            </th>
+            <td class="px-3 py-4 max-sm:p-0">
+              <VerdictBadge verdict={p.verdict} lang={lang} />
+            </td>
+            <td class="px-5 py-4 text-[#3E4A5E] max-sm:p-0">{he ? p.whyHe : p.why}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

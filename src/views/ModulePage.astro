@@ -1,0 +1,96 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import DoneMark from '@/components/lesson/DoneMark.astro';
+import ProgressMarks from '@/components/lesson/ProgressMarks.astro';
+import { type Lang } from '@/i18n/ui';
+import { fill, localizePath, useTranslations } from '@/i18n/utils';
+import { getCourse, lessonPath, lessonTitles, moduleTitles, publishedEntry } from '@/lib/course';
+
+interface Props {
+  moduleId: string;
+  lang: Lang;
+}
+
+const { moduleId, lang } = Astro.props;
+const t = useTranslations(lang);
+const other: Lang = lang === 'he' ? 'en' : 'he';
+
+const module = (await getCourse()).find((m) => m.id === moduleId)!;
+const names = moduleTitles(module, lang);
+// Only show a total once every lesson has a length, so it's never misleadingly short.
+const allTimed = module.lessons.every((l) => l.en.data.minutes !== undefined);
+const totalMinutes = allTimed ? module.lessons.reduce((sum, l) => sum + (l.en.data.minutes ?? 0), 0) : 0;
+---
+
+<BaseLayout title={names.title} description={names.description}>
+  <div class="mx-auto flex max-w-[880px] flex-col gap-8 px-4 py-8 sm:px-6 lg:py-12">
+    <header class="flex flex-col gap-3">
+      <nav aria-label={t('learn.breadcrumb')}>
+        <ol class="m-0 flex list-none flex-wrap items-center gap-x-2 p-0 text-sm text-muted">
+          <li><a href={localizePath('/#courses', lang)} class="inline-flex min-h-11 items-center">{t('learn.courses')}</a></li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page">{fill(t('learn.module'), { n: module.data.num })}</li>
+        </ol>
+      </nav>
+      <span class="font-display text-3xl font-extrabold text-blue" aria-hidden="true">{String(module.data.num).padStart(2, '0')}</span>
+      <h1 class="m-0 text-[34px] leading-[1.08] tracking-tight sm:text-[46px]">{names.title}</h1>
+      <p class="text-page-start m-0 text-lg text-[#3E4A5E]" lang={other} dir={other === 'he' ? 'rtl' : 'ltr'}>{names.subtitle}</p>
+      <p class="m-0 max-w-[640px] text-lg leading-relaxed text-[#3E4A5E]">{names.description}</p>
+      {
+        module.lessons.length > 0 && (
+          <p class="m-0 text-sm text-muted">
+            {fill(t('learn.lessonsCount'), { n: module.lessons.length })}
+            {totalMinutes > 0 && <> · {fill(t('learn.minutes'), { n: totalMinutes })}</>}
+          </p>
+        )
+      }
+    </header>
+
+    <section aria-labelledby="lessons-heading" class="flex flex-col gap-3">
+      <h2 id="lessons-heading" class="sr-only">{t('learn.lessonsInModule')}</h2>
+      {
+        module.lessons.length === 0 ? (
+          <p class="m-0 rounded-card border border-dashed border-line-strong bg-card p-6 text-muted">{t('learn.noLessons')}</p>
+        ) : (
+          <ol class="m-0 flex list-none flex-col gap-3 p-0">
+            {module.lessons.map((lesson, i) => {
+              const ready = !!publishedEntry(lesson, lang);
+              const titles = lessonTitles(lesson, lang);
+              const minutes = lesson.en.data.minutes;
+              return (
+                <li>
+                  <a
+                    href={localizePath(lessonPath(lesson), lang)}
+                    data-lesson-ref={lesson.ref}
+                    class="group grid min-h-11 grid-cols-[32px_minmax(0,1fr)_auto] items-center gap-x-3.5 rounded-card border border-line bg-card px-4 py-4 text-navy no-underline hover:border-blue hover:text-navy sm:px-5"
+                  >
+                    <span class="flex size-8 items-center justify-center rounded-full bg-blue-tint text-sm font-semibold text-blue">
+                      {i + 1}
+                    </span>
+                    <span class="flex min-w-0 flex-col gap-0.5">
+                      <span class="font-semibold">{titles.title}</span>
+                      <span class="text-page-start text-sm text-muted" lang={other} dir={other === 'he' ? 'rtl' : 'ltr'}>
+                        {titles.subtitle}
+                      </span>
+                    </span>
+                    <span class="flex flex-col items-end gap-1 text-end text-[13px] text-muted">
+                      {minutes && <span>{fill(t('learn.minutes'), { n: minutes })}</span>}
+                      {ready ? (
+                        <span class="flex items-center gap-1.5">
+                          <DoneMark lang={lang} />
+                        </span>
+                      ) : (
+                        <span class="rounded-full bg-page px-2 py-0.5 font-semibold">{t('learn.comingSoon')}</span>
+                      )}
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ol>
+        )
+      }
+    </section>
+  </div>
+  <ProgressMarks />
+</BaseLayout>

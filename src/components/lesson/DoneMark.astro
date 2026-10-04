@@ -1,0 +1,21 @@
+---
+// Inside a `group` with data-lesson-ref: a tick when done, otherwise a ring.
+import { type Lang } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang: Lang;
+  current?: boolean;
+}
+
+const { lang, current = false } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<span class="flex size-[18px] shrink-0 items-center justify-center" aria-hidden="true">
+  <svg class="hidden text-ok group-data-[done=true]:block" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 12l5 5 9-10"></path>
+  </svg>
+  <span class:list={['size-[18px] rounded-full border-2 group-data-[done=true]:hidden', current ? 'border-blue' : 'border-line-strong']}></span>
+</span>
+<span class="sr-only hidden group-data-[done=true]:inline">({t('learn.completed')})</span>

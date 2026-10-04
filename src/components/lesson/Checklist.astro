@@ -1,0 +1,23 @@
+---
+// <Checklist items={["…", "…"]} /> — ticks are saved in the browser per lesson.
+import ChecklistIsland from './ChecklistIsland';
+import { getLangFromPath, stripLang, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  items: string[];
+}
+
+const lang = getLangFromPath(Astro.url.pathname);
+const t = useTranslations(lang);
+// "/learn/investing/israeli-funds-trap" → "investing/israeli-funds-trap"
+const lessonRef = stripLang(Astro.url.pathname).replace(/^\/learn\//, '').replace(/\/$/, '');
+const { items } = Astro.props;
+---
+
+<ChecklistIsland
+  client:visible
+  items={items}
+  lessonRef={lessonRef}
+  title={t('learn.checklist')}
+  progressTemplate={t('learn.checklistDone')}
+/>

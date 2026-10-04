@@ -2,6 +2,7 @@
 // Temporary page for the Step 1–2 review. Replaced by the real homepage in Step 5.
 import { getCollection } from 'astro:content';
 import { type Lang } from '@/i18n/ui';
+import { localizePath } from '@/i18n/utils';
 import { parseLessonEntryId } from '@/lib/lessons';
 import { quiz, site } from '@/lib/data';
 
@@ -43,7 +44,7 @@ const verdicts = [
 <section class="mx-auto flex max-w-[1180px] flex-col gap-10 px-4 py-12 sm:px-6 sm:py-16">
   <div class="flex flex-col gap-4">
     <span class="self-start rounded-full bg-blue-tint px-3 py-1.5 text-[13px] font-semibold tracking-wide text-blue uppercase">
-      {he ? 'שלבים 1–2 · תצוגה מקדימה' : 'Steps 1–2 · Setup preview'}
+      {he ? 'שלבים 1–3 · תצוגה מקדימה' : 'Steps 1–3 · Setup preview'}
     </span>
     <h1 class="m-0 text-4xl leading-[1.05] sm:text-[54px]">
       {he ? 'אמריקאים שגרים בישראל: מה לעשות עם הכסף.' : 'For Americans living in Israel: what to do with your money.'}
@@ -75,12 +76,17 @@ const verdicts = [
     <ol class="m-0 grid list-none gap-2 p-0 sm:grid-cols-2">
       {
         modules.map((m) => (
-          <li class="flex gap-3 rounded-control border border-line p-3">
-            <span class="font-display text-xl font-extrabold text-blue">{String(m.data.num).padStart(2, '0')}</span>
-            <span class="flex flex-col">
-              <span class="font-semibold">{he ? m.data.titleHe : m.data.title}</span>
-              <span class="text-sm text-muted">{he ? m.data.descriptionHe : m.data.description}</span>
-            </span>
+          <li>
+            <a
+              href={localizePath(`/learn/${m.id}`, lang)}
+              class="flex h-full gap-3 rounded-control border border-line p-3 text-navy no-underline hover:border-blue hover:text-navy"
+            >
+              <span class="font-display text-xl font-extrabold text-blue">{String(m.data.num).padStart(2, '0')}</span>
+              <span class="flex flex-col">
+                <span class="font-semibold">{he ? m.data.titleHe : m.data.title}</span>
+                <span class="text-sm text-muted">{he ? m.data.descriptionHe : m.data.description}</span>
+              </span>
+            </a>
           </li>
         ))
       }

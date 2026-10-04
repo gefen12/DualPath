@@ -1,0 +1,12 @@
+---
+import ModulePage from '@/views/ModulePage.astro';
+import { getCourse } from '@/lib/course';
+
+export async function getStaticPaths() {
+  return (await getCourse()).map((m) => ({ params: { module: m.id } }));
+}
+
+const { module } = Astro.params;
+---
+
+<ModulePage moduleId={module} lang="he" />

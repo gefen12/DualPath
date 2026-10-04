@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getLangFromPath, localizePath, stripLang, switchLangPath } from '../src/i18n/utils';
+import { fill, getLangFromPath, localizePath, stripLang, switchLangPath } from '../src/i18n/utils';
 
 describe('getLangFromPath', () => {
   it('treats /he paths as Hebrew and everything else as English', () => {
@@ -32,5 +32,11 @@ describe('switchLangPath', () => {
     expect(switchLangPath('/he', 'en')).toBe('/');
     expect(switchLangPath('/', 'he')).toBe('/he/');
     expect(stripLang('/he/deadlines')).toBe('/deadlines');
+  });
+});
+describe('fill', () => {
+  it('fills named slots and leaves unknown ones visible', () => {
+    expect(fill('Lesson {n} of {total}', { n: 2, total: 5 })).toBe('Lesson 2 of 5');
+    expect(fill('{n} min {unit}', { n: 8 })).toBe('8 min {unit}');
   });
 });

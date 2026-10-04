@@ -1,0 +1,51 @@
+---
+import DoneMark from './DoneMark.astro';
+import { type Lang } from '@/i18n/ui';
+import { fill, localizePath, useTranslations } from '@/i18n/utils';
+import { lessonPath, lessonTitles, moduleTitles, publishedEntry, type CourseModule } from '@/lib/course';
+
+interface Props {
+  module: CourseModule;
+  currentRef: string;
+  lang: Lang;
+  class?: string;
+}
+
+const { module, currentRef, lang, class: className } = Astro.props;
+const t = useTranslations(lang);
+const navId = `sidebar-${module.id}`;
+---
+
+<aside class:list={['flex flex-col gap-1 rounded-card border border-line bg-card p-5', className]}>
+  <div class="text-xs font-semibold tracking-wider text-muted uppercase">{fill(t('learn.module'), { n: module.data.num })}</div>
+  <h2 id={navId} class="m-0 mb-2 text-xl">{moduleTitles(module, lang).title}</h2>
+  <nav aria-labelledby={navId}>
+    <ol class="m-0 flex list-none flex-col gap-1 p-0">
+      {
+        module.lessons.map((lesson) => {
+          const current = lesson.ref === currentRef;
+          const ready = !!publishedEntry(lesson, lang);
+          return (
+            <li>
+              <a
+                href={localizePath(lessonPath(lesson), lang)}
+                aria-current={current ? 'page' : undefined}
+                data-lesson-ref={lesson.ref}
+                class:list={[
+                  'group flex min-h-11 items-center gap-2.5 rounded-[10px] px-2.5 py-2 text-[15px] leading-snug no-underline',
+                  current ? 'bg-blue-tint font-semibold text-navy hover:text-navy' : 'text-[#3E4A5E] hover:bg-page hover:text-navy',
+                ]}
+              >
+                <DoneMark lang={lang} current={current} />
+                <span class="flex min-w-0 flex-col">
+                  <span>{lessonTitles(lesson, lang).title}</span>
+                  {!ready && <span class="text-xs font-normal text-muted">{t('learn.comingSoon')}</span>}
+                </span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ol>
+  </nav>
+</aside>

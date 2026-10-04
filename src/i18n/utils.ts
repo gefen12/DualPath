@@ -14,6 +14,11 @@ export function useTranslations(lang: Lang) {
   return (key: UIKey): string => ui[lang][key] ?? ui[defaultLang][key];
 }
 
+/** Fill `{name}` slots: `fill('{n} min', { n: 8 })` → `8 min`. */
+export function fill(template: string, values: Record<string, string | number>): string {
+  return template.replace(/\{(\w+)\}/g, (slot, name: string) => String(values[name] ?? slot));
+}
+
 /** Strip the language prefix: `/he/glossary` → `/glossary`. */
 export function stripLang(pathname: string): string {
   const lang = getLangFromPath(pathname);

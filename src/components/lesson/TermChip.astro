@@ -1,0 +1,15 @@
+---
+// A Hebrew term and its English meaning: <TermChip he="קרן סל" en="ETF" />
+interface Props {
+  he: string;
+  en: string;
+}
+
+const { he, en } = Astro.props;
+---
+
+<span class="term-chip me-1.5 mb-1.5 inline-flex items-center gap-2 rounded-full border border-line bg-card px-3.5 py-1.5 align-top text-[15px] leading-snug">
+  <span lang="he" dir="rtl" class="font-hebrew font-bold">{he}</span>
+  <span class="text-muted">=</span>
+  <span lang="en" dir="ltr">{en}</span>
+</span>

@@ -1,0 +1,31 @@
+---
+// <Callout type="warning|info">…</Callout>
+import { getLangFromPath, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  type?: 'warning' | 'info';
+}
+
+const { type = 'info' } = Astro.props;
+const t = useTranslations(getLangFromPath(Astro.url.pathname));
+
+const styles = {
+  warning: {
+    box: 'bg-depends-bg text-[#6B3307]',
+    icon: 'text-depends',
+    path: 'M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z',
+  },
+  info: {
+    box: 'bg-blue-tint text-navy',
+    icon: 'text-blue',
+    path: 'M12 16v-4M12 8h.01M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z',
+  },
+}[type];
+---
+
+<div role="note" aria-label={t(`callout.${type}`)} class={`flex items-start gap-3.5 rounded-[14px] px-5 py-4 text-base leading-relaxed ${styles.box}`}>
+  <svg class={`mt-1 shrink-0 ${styles.icon}`} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d={styles.path}></path>
+  </svg>
+  <div class="min-w-0"><slot /></div>
+</div>

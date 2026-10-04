@@ -24,5 +24,17 @@ export default defineConfig({
       i18n: { defaultLocale: 'en', locales: { en: 'en', he: 'he' } },
     }),
   ],
-  vite: { plugins: [tailwindcss()] },
+  vite: {
+    plugins: [tailwindcss()],
+    build: {
+      rollupOptions: {
+        // Astro's own MDX output trips this bundler notice for every lesson.
+        // It's harmless and would bury real warnings (like stale reviews).
+        onwarn(warning, warn) {
+          if (warning.code === 'MODULE_LEVEL_DIRECTIVE' && warning.message.includes('astro:head-inject')) return;
+          warn(warning);
+        },
+      },
+    },
+  },
 });

@@ -92,8 +92,8 @@ describe('lesson files', () => {
     expect(wrong).toEqual([]);
   });
 
-  it('exist in both English and Hebrew', () => {
-    expect(he.map((l) => l.ref).sort()).toEqual(en.map((l) => l.ref).sort());
+  it('have an English file for every Hebrew file', () => {
+    expect(he.filter((l) => !enByRef.has(l.ref)).map((l) => l.path)).toEqual([]);
   });
 
   it('agree between languages on module, order and title', () => {

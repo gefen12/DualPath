@@ -1,0 +1,29 @@
+---
+// Ticks lessons the learner has finished. Any element with data-lesson-ref gets
+// data-done="true|false". An element with data-complete-on-view="<ref>" marks
+// that lesson finished once it scrolls into view (the end of a lesson).
+---
+
+<script>
+  import { getCompletedLessons, markLessonCompleted } from '@/lib/progress';
+
+  function paint() {
+    const done = getCompletedLessons();
+    document.querySelectorAll<HTMLElement>('[data-lesson-ref]').forEach((el) => {
+      el.dataset.done = String(done.has(el.dataset.lessonRef ?? ''));
+    });
+  }
+
+  paint();
+
+  const end = document.querySelector<HTMLElement>('[data-complete-on-view]');
+  if (end && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      markLessonCompleted(end.dataset.completeOnView ?? '');
+      paint();
+      observer.disconnect();
+    });
+    observer.observe(end);
+  }
+</script>

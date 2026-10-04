@@ -1,0 +1,176 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import LessonSidebar from '@/components/lesson/LessonSidebar.astro';
+import ProgressMarks from '@/components/lesson/ProgressMarks.astro';
+import TermChip from '@/components/lesson/TermChip.astro';
+import Callout from '@/components/lesson/Callout.astro';
+import VerdictTable from '@/components/lesson/VerdictTable.astro';
+import Checklist from '@/components/lesson/Checklist.astro';
+import { type Lang } from '@/i18n/ui';
+import { fill, localizePath, useTranslations } from '@/i18n/utils';
+import {
+  availableInOtherLanguage,
+  getCourse,
+  getNeighbours,
+  lessonPath,
+  lessonTitles,
+  modulePath,
+  moduleTitles,
+  publishedEntry,
+} from '@/lib/course';
+import { formatDate } from '@/lib/format';
+import { site } from '@/lib/data';
+
+interface Props {
+  lessonRef: string;
+  lang: Lang;
+}
+
+const { lessonRef, lang } = Astro.props;
+const t = useTranslations(lang);
+const other: Lang = lang === 'he' ? 'en' : 'he';
+
+const course = await getCourse();
+const module = course.find((m) => m.lessons.some((l) => l.ref === lessonRef))!;
+const index = module.lessons.findIndex((l) => l.ref === lessonRef);
+const lesson = module.lessons[index]!;
+const { prev, next } = await getNeighbours(lessonRef);
+
+const entry = publishedEntry(lesson, lang);
+const { Content } = entry ? await render(entry) : { Content: undefined };
+const titles = lessonTitles(lesson, lang);
+const moduleNames = moduleTitles(module, lang);
+const minutes = lesson.en.data.minutes;
+const position = index + 1;
+const total = module.lessons.length;
+const progressLabel = `${fill(t('learn.module'), { n: module.data.num })} · ${fill(t('learn.lessonOf'), { n: position, total })}`;
+
+const components = { TermChip, Callout, VerdictTable, Checklist };
+---
+
+<BaseLayout title={titles.title} description={entry?.data.summary ?? moduleNames.description}>
+  <div class="mx-auto grid max-w-[1180px] items-start gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-12 lg:py-10">
+    <LessonSidebar module={module} currentRef={lesson.ref} lang={lang} class="order-2 lg:sticky lg:top-6 lg:order-1" />
+
+    <article class="order-1 flex min-w-0 max-w-[760px] flex-col gap-7 lg:order-2">
+      <header class="flex flex-col gap-3">
+        <nav aria-label={t('learn.breadcrumb')}>
+          <ol class="m-0 flex list-none flex-wrap items-center gap-x-2 p-0 text-sm text-muted">
+            <li><a href={localizePath('/#courses', lang)} class="inline-flex min-h-11 items-center">{t('learn.courses')}</a></li>
+            <li aria-hidden="true">/</li>
+            <li><a href={localizePath(modulePath(module.id), lang)} class="inline-flex min-h-11 items-center">{moduleNames.title}</a></li>
+          </ol>
+        </nav>
+        <h1 class="m-0 text-[34px] leading-[1.08] tracking-tight sm:text-[46px]">{titles.title}</h1>
+        <p class="text-page-start m-0 text-lg text-[#3E4A5E]" lang={other} dir={other === 'he' ? 'rtl' : 'ltr'}>{titles.subtitle}</p>
+        <p class="m-0 flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted">
+          {minutes && <span>{fill(t('learn.minRead'), { n: minutes })}</span>}
+          {entry && <span>{fill(t('learn.reviewedBy'), { name: entry.data.reviewer ?? site.reviewer })}</span>}
+          {entry?.data.lastReviewed && <span>{fill(t('learn.lastReviewed'), { date: formatDate(entry.data.lastReviewed, lang) })}</span>}
+        </p>
+        <div class="flex items-center gap-3 text-sm text-muted">
+          <span id="module-progress">{progressLabel}</span>
+          <div
+            role="progressbar"
+            aria-labelledby="module-progress"
+            aria-valuemin={0}
+            aria-valuemax={total}
+            aria-valuenow={position}
+            class="h-2 w-40 overflow-hidden rounded-full bg-line"
+          >
+            <div class="h-full rounded-full bg-blue" style={`width: ${Math.round((position / total) * 100)}%`}></div>
+          </div>
+        </div>
+      </header>
+
+      {
+        entry && Content ? (
+          <>
+            <section aria-labelledby="in-short" class="flex flex-col gap-2.5 rounded-card bg-navy px-6 py-6 text-white">
+              <h2 id="in-short" class="m-0 font-sans text-[13px] font-semibold tracking-wider text-[#9CC0F5] uppercase">
+                {t('learn.inShort')}
+              </h2>
+              <p class="m-0 text-lg leading-relaxed">{entry.data.summary}</p>
+            </section>
+            <div class="lesson-body">
+              <Content components={components} />
+            </div>
+          </>
+        ) : (
+          <div class="flex flex-col gap-3 rounded-card border border-dashed border-line-strong bg-card p-6">
+            {availableInOtherLanguage(lesson, lang) ? (
+              <>
+                <p class="m-0 text-lg font-semibold">{t('learn.notTranslated')}</p>
+                <a
+                  href={localizePath(lessonPath(lesson), other)}
+                  hreflang={other}
+                  class="inline-flex min-h-12 items-center self-start rounded-control bg-navy px-5 font-semibold text-white no-underline hover:text-white"
+                >
+                  {t('learn.readOther')}
+                </a>
+              </>
+            ) : (
+              <>
+                <p class="m-0 text-lg font-semibold">{t('learn.comingSoon')}</p>
+                <p class="m-0 text-muted">{t('learn.comingSoonBody')}</p>
+              </>
+            )}
+            <a href={localizePath(modulePath(module.id), lang)} class="inline-flex min-h-11 items-center self-start">
+              {t('learn.allLessons')}
+            </a>
+          </div>
+        )
+      }
+
+      {
+        entry?.data.sources?.length ? (
+          <section aria-labelledby="sources" class="flex flex-col gap-2">
+            <h2 id="sources" class="m-0 text-lg">{t('learn.sources')}</h2>
+            <ul class="m-0 flex list-disc flex-col gap-1 ps-5 text-[15px]">
+              {entry.data.sources.map((s) => (
+                <li>
+                  <a href={s.url} rel="noopener" lang="en">{s.title}</a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null
+      }
+
+      <nav
+        aria-label={`${t('learn.previous')} / ${t('learn.next')}`}
+        class="flex flex-wrap justify-between gap-3"
+        data-complete-on-view={entry ? lesson.ref : undefined}
+      >
+        {
+          prev ? (
+            <a
+              href={localizePath(lessonPath(prev), lang)}
+              class="inline-flex min-h-12 max-w-full items-center gap-2 rounded-control border border-line-strong bg-card px-5 font-semibold text-navy no-underline hover:text-navy"
+            >
+              <svg class="shrink-0 rtl:-scale-x-100" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
+              <span><span class="sr-only">{t('learn.previous')}: </span>{lessonTitles(prev, lang).title}</span>
+            </a>
+          ) : (
+            <span></span>
+          )
+        }
+        {
+          next && (
+            <a
+              href={localizePath(lessonPath(next), lang)}
+              class="ms-auto inline-flex min-h-12 max-w-full items-center gap-2 rounded-control bg-navy px-5 font-semibold text-white no-underline hover:text-white"
+            >
+              <span>{t('learn.next')}: {lessonTitles(next, lang).title}</span>
+              <svg class="shrink-0 rtl:-scale-x-100" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+            </a>
+          )
+        }
+      </nav>
+
+      <p class="m-0 text-[13px] leading-relaxed text-muted">{t('footer.disclaimer')}</p>
+    </article>
+  </div>
+  <ProgressMarks />
+</BaseLayout>

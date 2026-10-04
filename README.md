@@ -41,13 +41,17 @@ content/
 - Schemas are in `src/lib/schemas.ts`. A missing field, an unknown verdict or a bad
   date fails the build, and so does a broken link between files: `tests/content.test.ts`
   runs as part of `npm run build`.
-- **Adding a lesson:** create `lessons/en/<module>/<slug>.mdx` and the same path under
-  `lessons/he/`. Start with `status: coming-soon` (only `title`, `titleHe`, `module`
+- **Adding a lesson:** create one file, `lessons/en/<module>/<slug>.mdx`. Its English and
+  Hebrew pages (`/learn/<module>/<slug>`, `/he/learn/<module>/<slug>`) appear on the next build.
+  Add the Hebrew translation later at the same path under `lessons/he/`; until then the Hebrew
+  page links to the English lesson. Start with `status: coming-soon` (only `title`, `titleHe`, `module`
   and `order` are needed). A `published` lesson also needs `minutes`, `summary`,
   `lastReviewed`, `reviewer` and at least one source.
 - Lessons and other files link to a lesson as `"<module>/<slug>"`, e.g. `"investing/israeli-funds-trap"`.
 - In lesson bodies you can use `<TermChip he en>`, `<Callout type="warning|info">`,
   `<VerdictTable ids={[...product ids]}>` and `<Checklist items={[...]}>`.
+- Checklist ticks and finished lessons (a lesson counts as finished once the reader reaches
+  its end) are saved in the browser only, under `dualpath:*` keys.
 - The build warns when a published lesson's `lastReviewed` is more than 12 months old.
 - Placeholders such as `[CPA NAME]`, `[DATE]` and `[HEBREW TEXT]` stay visible on the
   site until someone fills them in. `grep -rn "\[HEBREW TEXT\]" content` lists the

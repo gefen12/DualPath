@@ -1,0 +1,13 @@
+---
+import LessonPage from '@/views/LessonPage.astro';
+import { getAllLessons } from '@/lib/course';
+
+// One page per lesson file, so a new MDX file is a new page with no code changes.
+export async function getStaticPaths() {
+  return (await getAllLessons()).map((l) => ({ params: { module: l.module, lesson: l.slug } }));
+}
+
+const { module, lesson } = Astro.params;
+---
+
+<LessonPage lessonRef={`${module}/${lesson}`} lang="he" />
