@@ -1,0 +1,77 @@
+@import 'tailwindcss';
+
+/* Design tokens from the PRD. Green / red / orange are for verdicts only. */
+@theme {
+  --color-navy: #13233f;
+  --color-blue: #1f5fbf;
+  --color-blue-dark: #163f80;
+  --color-blue-tint: #e8f0fc;
+  --color-page: #f7f8fa;
+  --color-card: #ffffff;
+  --color-line: #e3e7ee;
+  --color-line-strong: #cbd2dc;
+  --color-muted: #5a6578;
+
+  --color-ok: #05603a;
+  --color-ok-bg: #e3f5ea;
+  --color-avoid: #a3200f;
+  --color-avoid-bg: #fdecea;
+  --color-depends: #8a3f08;
+  --color-depends-bg: #fdf1e6;
+
+  --font-display: 'Bricolage Grotesque', 'Heebo', system-ui, sans-serif;
+  --font-sans: 'IBM Plex Sans', 'Heebo', system-ui, sans-serif;
+  --font-hebrew: 'Heebo', 'IBM Plex Sans', system-ui, sans-serif;
+
+  --radius-card: 20px;
+  --radius-control: 12px;
+
+  --shadow-hero: 0 12px 32px rgb(19 35 63 / 0.08);
+}
+
+@layer base {
+  html {
+    background: var(--color-page);
+    color: var(--color-navy);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Hebrew pages, and Hebrew runs inside English pages, use Heebo. Latin
+     glyphs inside Hebrew text fall back to IBM Plex Sans. */
+  :lang(he) {
+    font-family: var(--font-hebrew);
+  }
+  :lang(he) :is(h1, h2, h3, h4) {
+    font-family: 'Heebo', var(--font-display);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  a {
+    color: var(--color-blue);
+  }
+  a:hover {
+    color: var(--color-blue-dark);
+  }
+
+  /* Visible focus everywhere (WCAG 2.2 AA). */
+  :focus-visible {
+    outline: 3px solid var(--color-blue);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}

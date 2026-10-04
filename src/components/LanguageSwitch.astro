@@ -1,0 +1,55 @@
+---
+import { languages, type Lang } from '@/i18n/ui';
+import { switchLangPath, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Links, not buttons: each one goes to the same page in the other language.
+const options: { code: Lang; short: string }[] = [
+  { code: 'en', short: 'EN' },
+  { code: 'he', short: 'עב' },
+];
+---
+
+<div role="group" aria-label={t('lang.label')} class="flex overflow-hidden rounded-full border border-line-strong text-[13px]" dir="ltr">
+  {
+    options.map((o) => {
+      const active = o.code === lang;
+      return (
+        <a
+          href={switchLangPath(Astro.url.pathname, o.code)}
+          hreflang={o.code}
+          lang={o.code}
+          aria-label={languages[o.code]}
+          aria-current={active ? 'true' : undefined}
+          data-lang-switch={o.code}
+          class:list={[
+            'inline-flex min-h-11 min-w-11 items-center justify-center px-3 font-semibold no-underline',
+            active ? 'bg-navy text-white hover:text-white' : 'bg-card text-navy hover:bg-blue-tint hover:text-navy',
+            o.code === 'he' && 'font-hebrew font-bold',
+          ]}
+        >
+          {o.short}
+        </a>
+      );
+    })
+  }
+</div>
+
+<script>
+  // Remember the chosen language. Storage may be blocked; the site works without it.
+  document.querySelectorAll<HTMLAnchorElement>('[data-lang-switch]').forEach((link) => {
+    link.addEventListener('click', () => {
+      try {
+        localStorage.setItem('dualpath:lang', link.dataset.langSwitch ?? 'en');
+      } catch {
+        /* storage blocked */
+      }
+    });
+  });
+</script>
