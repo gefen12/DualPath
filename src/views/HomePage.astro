@@ -236,20 +236,20 @@ const dependsNames = listFormat.format(ofVerdict('depends').map((p) => p.name));
       <svg class="rtl:-scale-x-100" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
     </a>
   </section>
-</BaseLayout>
 
-<script>
-  import { nextOccurrence } from '@/lib/deadlines';
+  <script>
+    import { nextOccurrence } from '@/lib/deadlines';
 
-  // Re-order the calendar card by the visitor's today and show the first few.
-  document.querySelectorAll<HTMLOListElement>('[data-upcoming]').forEach((list) => {
-    const size = Number(list.dataset.upcoming);
-    const items = [...list.querySelectorAll<HTMLLIElement>('li[data-month]')];
-    const next = (li: HTMLLIElement) => nextOccurrence({ month: Number(li.dataset.month), day: Number(li.dataset.day) }).getTime();
-    items.sort((a, b) => next(a) - next(b));
-    items.forEach((li, i) => {
-      li.hidden = i >= size;
-      list.append(li);
+    // Re-order the calendar card by the visitor's today and show the first few.
+    document.querySelectorAll<HTMLOListElement>('[data-upcoming]').forEach((list) => {
+      const size = Number(list.dataset.upcoming);
+      const items = [...list.querySelectorAll<HTMLLIElement>('li[data-month]')];
+      const next = (li: HTMLLIElement) => nextOccurrence({ month: Number(li.dataset.month), day: Number(li.dataset.day) }).getTime();
+      items.sort((a, b) => next(a) - next(b));
+      items.forEach((li, i) => {
+        li.hidden = i >= size;
+        list.append(li);
+      });
     });
-  });
-</script>
+  </script>
+</BaseLayout>
