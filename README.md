@@ -76,6 +76,7 @@ content/
 - **CPA review:** lessons default to `cpaReviewed: false`, which shows a "Draft — not yet
   reviewed by a CPA" banner and treats `lastReviewed` as "sources checked". When a CPA signs off,
   set `cpaReviewed: true`, `reviewer` and `lastReviewed`. See `docs/content-review.md`.
+- `docs/cpa-questions.md` lists the open questions for the CPA (also as a shared doc).
 - The build warns when a published lesson's `lastReviewed` is more than 12 months old.
 - Placeholders such as `[CPA NAME]`, `[DATE]` and `[HEBREW TEXT]` stay visible on the
   site until someone fills them in. `grep -rn "\[HEBREW TEXT\]" content` lists the
