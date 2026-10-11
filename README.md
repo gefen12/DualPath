@@ -52,6 +52,14 @@ content/
   `<VerdictTable ids={[...product ids]}>` and `<Checklist items={[...]}>`.
 - Checklist ticks and finished lessons (a lesson counts as finished once the reader reaches
   its end) are saved in the browser only, under `dualpath:*` keys.
+- **Fund checker search** ignores case, spaces, hyphens, gershayim and quotes, and also
+  looks at each product's `keywords` (`src/lib/search.ts`). Add spellings people type
+  (tickers, transliterations, Hebrew with and without ״) as keywords.
+- **Deadlines** are month + day and repeat yearly. Each one gets an `.ics` file
+  (`/deadlines/<id>.ics`, plus `/deadlines/dualpath-deadlines.ics` for all of them) with a
+  yearly repeat rule. Hebrew calendar files fall back to English while the Hebrew text is a placeholder.
+- **Ask form:** set `askFormEndpoint` in `site.json` to a form service URL (e.g. Formspree).
+  Until then the form shows that it isn't connected and points to the contact email.
 - The build warns when a published lesson's `lastReviewed` is more than 12 months old.
 - Placeholders such as `[CPA NAME]`, `[DATE]` and `[HEBREW TEXT]` stay visible on the
   site until someone fills them in. `grep -rn "\[HEBREW TEXT\]" content` lists the

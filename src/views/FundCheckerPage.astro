@@ -1,0 +1,142 @@
+---
+import { getCollection } from 'astro:content';
+import productsJson from '../../content/products.json';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import FundChecker, { type CheckerLabels, type CheckerProduct } from '@/components/tools/FundChecker';
+import AskForm, { type AskLabels } from '@/components/tools/AskForm';
+import { type Lang } from '@/i18n/ui';
+import { fill, localizePath, useTranslations } from '@/i18n/utils';
+import { site } from '@/lib/data';
+import { isPlaceholder } from '@/lib/schemas';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const he = lang === 'he';
+const other: Lang = he ? 'en' : 'he';
+
+// Keep the order of products.json: it groups the products the way a reviewer wrote them.
+// (Collections don't promise file order.)
+const fileOrder = productsJson.map((p) => p.id);
+const products: CheckerProduct[] = (await getCollection('products'))
+  .sort((a, b) => fileOrder.indexOf(a.id) - fileOrder.indexOf(b.id))
+  .map(({ data: p }) => ({
+    id: p.id,
+    name: he ? p.nameHe : p.name,
+    otherName: he ? p.name : p.nameHe,
+    verdict: p.verdict,
+    why: he ? p.whyHe : p.why,
+    spot: he ? p.spotHe : p.spot,
+    searchText: [p.name, p.nameHe, ...p.keywords],
+    lessonHref: p.lesson ? localizePath(`/learn/${p.lesson}`, lang) : undefined,
+  }));
+
+const labels: CheckerLabels = {
+  searchLabel: t('checker.searchLabel'),
+  placeholder: t('checker.placeholder'),
+  hint: t('tools.searchHint'),
+  filterLabel: t('checker.filterLabel'),
+  all: t('checker.all'),
+  verdicts: { ok: t('verdict.ok'), avoid: t('verdict.avoid'), depends: t('verdict.depends') },
+  count: t('checker.count'),
+  countOne: t('checker.countOne'),
+  spot: t('checker.spot'),
+  readLesson: t('checker.readLesson'),
+  emptyTitle: t('checker.emptyTitle'),
+  emptyBody: t('checker.emptyBody'),
+  askCta: t('checker.askCta'),
+};
+
+const askLabels: AskLabels = {
+  title: t('ask.title'),
+  product: t('ask.product'),
+  productPlaceholder: t('ask.productPlaceholder'),
+  email: t('ask.email'),
+  emailHint: t('ask.emailHint'),
+  send: t('ask.send'),
+  sending: t('ask.sending'),
+  sent: t('ask.sent'),
+  error: t('ask.error'),
+  notConnected: fill(t('ask.notConnected'), { email: site.contactEmail }),
+};
+const endpoint = isPlaceholder(site.askFormEndpoint) ? undefined : site.askFormEndpoint;
+
+const clues = [
+  {
+    title: t('checker.usTitle'),
+    tone: 'border-[#BFE3CC] bg-[#F3FBF6]',
+    badge: 'bg-ok-bg text-ok',
+    heading: 'text-ok',
+    icon: 'M5 12l5 5 9-10',
+    rows: [t('checker.usName'), t('checker.usIsin'), t('checker.usPrice')],
+  },
+  {
+    title: t('checker.nonUsTitle'),
+    tone: 'border-[#F3C4BD] bg-[#FEF6F5]',
+    badge: 'bg-avoid-bg text-avoid',
+    heading: 'text-avoid',
+    icon: 'M6 6l12 12M18 6L6 18',
+    rows: [t('checker.nonUsName'), t('checker.nonUsIsin'), t('checker.nonUsPrice')],
+  },
+];
+const clueLabels = [t('checker.clueName'), t('checker.clueIsin'), t('checker.cluePrice')];
+---
+
+<BaseLayout title={t('checker.title')} description={t('checker.intro')}>
+  <section class="mx-auto flex max-w-[1180px] flex-col gap-6 px-4 pt-10 pb-10 sm:px-6 sm:pt-12">
+    <PageHeader lang={lang} titleKey="checker.title" introKey="checker.intro" />
+    <FundChecker client:load products={products} labels={labels} otherLang={other} />
+  </section>
+
+  <section aria-labelledby="how-to-tell" class="border-y border-line bg-card">
+    <div class="mx-auto flex max-w-[1180px] flex-col gap-6 px-4 py-12 sm:px-6 sm:py-14">
+      <div>
+        <h2 id="how-to-tell" class="m-0 text-[28px] sm:text-[32px]">{t('checker.howTitle')}</h2>
+        <p class="m-0 mt-2 max-w-[720px] text-[17px] leading-normal text-[#3E4A5E]">{t('checker.howIntro')}</p>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2">
+        {
+          clues.map((c) => (
+            <div class={`flex flex-col gap-3.5 rounded-card border p-6 ${c.tone}`}>
+              <div class="flex items-center gap-2.5">
+                <span class={`flex size-[30px] shrink-0 items-center justify-center rounded-full ${c.badge}`} aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d={c.icon} />
+                  </svg>
+                </span>
+                <h3 class={`m-0 font-sans text-xl font-semibold ${c.heading}`}>{c.title}</h3>
+              </div>
+              <dl class="m-0 grid grid-cols-[110px_minmax(0,1fr)] gap-x-3 gap-y-2.5 text-base">
+                {c.rows.map((row, i) => (
+                  <>
+                    <dt class="text-muted">{clueLabels[i]}</dt>
+                    <dd class="m-0 font-semibold">{row}</dd>
+                  </>
+                ))}
+              </dl>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="ask" class="mx-auto grid max-w-[1180px] scroll-mt-6 gap-4 px-4 pt-12 pb-16 sm:px-6 md:grid-cols-2">
+    <a
+      href={localizePath('/learn/investing/israeli-funds-trap', lang)}
+      class="flex flex-col gap-2 rounded-card bg-navy p-6 text-white no-underline hover:text-white"
+    >
+      <span class="text-[13px] font-semibold tracking-wider text-[#9CC0F5] uppercase">{t('checker.trapEyebrow')}</span>
+      <span class="font-display text-2xl font-extrabold">
+        {t('checker.trapTitle')}
+        <svg class="inline align-[-3px] rtl:-scale-x-100" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </span>
+      <span class="text-[15px] leading-normal text-[#C7D0DE]">{t('checker.trapBody')}</span>
+    </a>
+    <AskForm client:visible endpoint={endpoint} labels={askLabels} />
+  </section>
+</BaseLayout>

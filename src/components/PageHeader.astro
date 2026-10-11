@@ -1,0 +1,22 @@
+---
+// Page title in the page language, the same title in the other language, and an intro.
+import { ui, type Lang, type UIKey } from '@/i18n/ui';
+
+interface Props {
+  lang: Lang;
+  titleKey: UIKey;
+  introKey: UIKey;
+}
+
+const { lang, titleKey, introKey } = Astro.props;
+const other: Lang = lang === 'he' ? 'en' : 'he';
+---
+
+<div class="flex flex-col gap-2.5">
+  <h1 class="m-0 text-[34px] leading-[1.08] tracking-tight sm:text-[46px]">{ui[lang][titleKey]}</h1>
+  <p class="text-page-start m-0 text-xl text-[#3E4A5E]" lang={other} dir={other === 'he' ? 'rtl' : 'ltr'}>
+    {ui[other][titleKey]}
+  </p>
+  <p class="m-0 max-w-[680px] text-lg leading-relaxed text-[#3E4A5E]">{ui[lang][introKey]}</p>
+  <slot />
+</div>

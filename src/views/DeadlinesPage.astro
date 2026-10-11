@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import { type Lang } from '@/i18n/ui';
+import { fill, localizePath, useTranslations } from '@/i18n/utils';
+import { allDeadlinesIcsPath, deadlineIcsPath } from '@/lib/calendar';
+import { byCalendar } from '@/lib/deadlines';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const he = lang === 'he';
+const other: Lang = he ? 'en' : 'he';
+
+const deadlines = byCalendar((await getCollection('deadlines')).map((d) => d.data));
+// Month and day only: every deadline repeats each year. 2001 is just a non-leap year.
+const dayLabel = new Intl.DateTimeFormat(he ? 'he-IL' : 'en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+const downloadIcon = 'M12 3v12M7 10l5 5 5-5M5 21h14';
+---
+
+<BaseLayout title={t('deadlines.title')} description={t('deadlines.intro')}>
+  <section class="mx-auto flex max-w-[880px] flex-col gap-8 px-4 pt-10 pb-16 sm:px-6 sm:pt-12">
+    <PageHeader lang={lang} titleKey="deadlines.title" introKey="deadlines.intro">
+      <a
+        href={localizePath(allDeadlinesIcsPath, lang)}
+        download
+        class="mt-2 inline-flex min-h-12 items-center gap-2 self-start rounded-control bg-navy px-5 font-semibold text-white no-underline hover:text-white"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={downloadIcon}></path></svg>
+        {fill(t('deadlines.all'), { n: deadlines.length })}
+      </a>
+    </PageHeader>
+
+    <ol class="m-0 flex list-none flex-col gap-3 p-0">
+      {
+        deadlines.map((d) => {
+          const title = he ? d.titleHe : d.title;
+          return (
+            <li class="grid grid-cols-[76px_minmax(0,1fr)] items-start gap-x-4 gap-y-3 rounded-card border border-line bg-card p-4 sm:grid-cols-[84px_minmax(0,1fr)_auto] sm:items-center sm:p-5">
+              <span class="rounded-[10px] bg-blue-tint py-2 text-center text-[15px] font-semibold text-blue">
+                {dayLabel.format(new Date(Date.UTC(2001, d.month - 1, d.day)))}
+              </span>
+              <div class="flex min-w-0 flex-col gap-0.5">
+                <h2 class="m-0 font-sans text-lg font-semibold">{title}</h2>
+                <p class="text-page-start m-0 text-sm text-muted" lang={other} dir={other === 'he' ? 'rtl' : 'ltr'}>
+                  {he ? d.title : d.titleHe}
+                </p>
+                <p class="m-0 mt-1 text-[15px] leading-normal text-[#3E4A5E]">{he ? d.noteHe : d.note}</p>
+              </div>
+              <a
+                href={localizePath(deadlineIcsPath(d.id), lang)}
+                download
+                aria-label={fill(t('deadlines.addLabel'), { title })}
+                class="col-span-2 inline-flex min-h-11 items-center justify-center gap-2 rounded-control border border-line-strong bg-card px-4 text-[15px] font-semibold text-navy no-underline hover:border-navy hover:text-navy sm:col-span-1"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"></path></svg>
+                {t('deadlines.add')}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ol>
+  </section>
+</BaseLayout>

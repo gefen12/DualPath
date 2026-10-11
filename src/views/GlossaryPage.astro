@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import Glossary, { type GlossaryLabels, type GlossaryRow } from '@/components/tools/Glossary';
+import { type Lang } from '@/i18n/ui';
+import { localizePath, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const he = lang === 'he';
+
+const rows: GlossaryRow[] = (await getCollection('glossary'))
+  .map(({ data: g }) => ({
+    id: g.id,
+    term: he ? g.he : g.en,
+    otherTerm: he ? g.en : g.he,
+    definition: he ? g.definitionHe : g.definition,
+    category: g.category,
+    lessonHref: g.lesson ? localizePath(`/learn/${g.lesson}`, lang) : undefined,
+  }))
+  .sort((a, b) => a.term.localeCompare(b.term, lang));
+
+const labels: GlossaryLabels = {
+  searchLabel: t('glossary.searchLabel'),
+  placeholder: t('glossary.placeholder'),
+  hint: t('tools.searchHint'),
+  filterLabel: t('glossary.filterLabel'),
+  all: t('glossary.all'),
+  categories: {
+    tax: t('glossary.cat.tax'),
+    accounts: t('glossary.cat.accounts'),
+    investing: t('glossary.cat.investing'),
+    family: t('glossary.cat.family'),
+  },
+  count: t('glossary.count'),
+  countOne: t('glossary.countOne'),
+  empty: t('glossary.empty'),
+  lesson: t('glossary.lesson'),
+};
+---
+
+<BaseLayout title={t('glossary.title')} description={t('glossary.intro')}>
+  <section class="mx-auto flex max-w-[1180px] flex-col gap-6 px-4 pt-10 pb-16 sm:px-6 sm:pt-12">
+    <PageHeader lang={lang} titleKey="glossary.title" introKey="glossary.intro" />
+    <Glossary client:load rows={rows} labels={labels} otherLang={he ? 'en' : 'he'} />
+  </section>
+</BaseLayout>

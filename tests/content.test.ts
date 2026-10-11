@@ -79,6 +79,10 @@ describe('JSON content files', () => {
     expectUnique(deadlines.map((d) => d.id), 'deadline ids');
   });
 
+  it('has no deadline id that clashes with the "download all" file', () => {
+    expect(deadlines.map((d) => d.id)).not.toContain('dualpath-deadlines');
+  });
+
   it('links products and glossary terms only to lessons that exist', () => {
     const links = [...products, ...glossary].flatMap((e) => (e.lesson ? [[e.id, e.lesson]] : []));
     const broken = links.filter(([, ref]) => !enByRef.has(ref!));

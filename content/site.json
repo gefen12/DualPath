@@ -3,5 +3,6 @@
   "reviewer": "[CPA NAME]",
   "reviewerTitle": "US–Israel tax specialist",
   "lastReviewed": "[DATE]",
-  "contactEmail": "[CONTACT EMAIL]"
+  "contactEmail": "[CONTACT EMAIL]",
+  "askFormEndpoint": "[FORM ENDPOINT]"
 }

@@ -18,6 +18,10 @@ export const GLOSSARY_CATEGORIES = ['tax', 'accounts', 'investing', 'family'] as
 /** A visible placeholder such as "[CPA NAME]", kept until the real value is known. */
 export const PLACEHOLDER = /^\[[A-Z ]+\]$/;
 
+export function isPlaceholder(value: string): boolean {
+  return PLACEHOLDER.test(value);
+}
+
 const id = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'ids are lower-case words joined by hyphens');
 const text = z.string().trim().min(1);
 const isoDate = z.iso.date();
@@ -32,6 +36,8 @@ export const siteSchema = z.strictObject({
   reviewerTitle: text,
   lastReviewed: z.union([isoDate, z.string().regex(PLACEHOLDER)]),
   contactEmail: z.union([z.email(), z.string().regex(PLACEHOLDER)]),
+  /** Where the "Ask about a product" form posts (e.g. a Formspree URL). */
+  askFormEndpoint: z.union([z.url({ protocol: /^https$/ }), z.string().regex(PLACEHOLDER)]),
 });
 
 export const moduleSchema = z.strictObject({
