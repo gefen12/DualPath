@@ -1,0 +1,77 @@
+---
+// Every source cited by a published lesson, grouped by country, deduplicated by URL.
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { type Lang } from '@/i18n/ui';
+import { localizePath, useTranslations } from '@/i18n/utils';
+import { getAllLessons, lessonPath, lessonTitles, publishedEntry } from '@/lib/course';
+import { SOURCE_COUNTRIES } from '@/lib/schemas';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+interface Source {
+  title: string;
+  url: string;
+  country: (typeof SOURCE_COUNTRIES)[number];
+  lessons: { title: string; href: string }[];
+}
+const byUrl = new Map<string, Source>();
+for (const lesson of await getAllLessons()) {
+  // A source counts once its lesson is published in either language.
+  const entries = [publishedEntry(lesson, 'en'), publishedEntry(lesson, 'he')].filter((e) => e !== undefined);
+  for (const s of entries.flatMap((e) => e.data.sources ?? [])) {
+    const source = byUrl.get(s.url) ?? { ...s, lessons: [] };
+    const href = localizePath(lessonPath(lesson), lang);
+    if (!source.lessons.some((l) => l.href === href)) source.lessons.push({ title: lessonTitles(lesson, lang).title, href });
+    byUrl.set(s.url, source);
+  }
+}
+const groups = SOURCE_COUNTRIES.map((country) => ({
+  country,
+  sources: [...byUrl.values()].filter((s) => s.country === country).sort((a, b) => a.title.localeCompare(b.title)),
+})).filter((g) => g.sources.length > 0);
+---
+
+<BaseLayout title={t('sources.title')} description={t('sources.intro')}>
+  <section class="mx-auto flex max-w-[880px] flex-col gap-8 px-4 pt-10 pb-16 sm:px-6 sm:pt-12">
+    <div class="flex flex-col gap-2.5">
+      <h1 class="m-0 text-[34px] leading-[1.08] tracking-tight sm:text-[46px]">{t('sources.title')}</h1>
+      <p class="m-0 max-w-[680px] text-lg leading-relaxed text-[#3E4A5E]">{t('sources.intro')}</p>
+    </div>
+    {groups.length === 0 && <p class="m-0 text-muted">{t('sources.none')}</p>}
+    {
+      groups.map((g) => (
+        <section aria-labelledby={`sources-${g.country}`} class="flex flex-col gap-3">
+          <h2 id={`sources-${g.country}`} class="m-0 text-2xl">
+            {t(`sources.country.${g.country}`)}
+          </h2>
+          <ul class="m-0 flex list-none flex-col gap-3 p-0">
+            {g.sources.map((s) => (
+              <li class="flex flex-col gap-1.5 rounded-card border border-line bg-card p-5">
+                <a href={s.url} rel="noopener" lang="en" class="font-semibold">
+                  {s.title}
+                </a>
+                <span class="text-sm break-all text-muted" dir="ltr">
+                  {s.url}
+                </span>
+                <span class="text-sm text-[#3E4A5E]">
+                  {t('sources.usedIn')}{' '}
+                  {s.lessons.map((l, i) => (
+                    <>
+                      {i > 0 && ', '}
+                      <a href={l.href}>{l.title}</a>
+                    </>
+                  ))}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </section>
+</BaseLayout>

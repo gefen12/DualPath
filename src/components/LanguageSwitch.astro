@@ -25,7 +25,6 @@ const options: { code: Lang; short: string }[] = [
           href={switchLangPath(Astro.url.pathname, o.code)}
           hreflang={o.code}
           lang={o.code}
-          aria-label={languages[o.code]}
           aria-current={active ? 'true' : undefined}
           data-lang-switch={o.code}
           class:list={[
@@ -35,6 +34,7 @@ const options: { code: Lang; short: string }[] = [
           ]}
         >
           {o.short}
+          <span class="sr-only">({languages[o.code]})</span>
         </a>
       );
     })

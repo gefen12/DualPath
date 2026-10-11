@@ -39,6 +39,14 @@ export const siteSchema = z.strictObject({
   contactEmail: z.union([z.email(), z.string().regex(PLACEHOLDER)]),
   /** Where the "Ask about a product" form posts (e.g. a Formspree URL). */
   askFormEndpoint: z.union([z.url({ protocol: /^https$/ }), z.string().regex(PLACEHOLDER)]),
+  /** Domain registered with Plausible (cookie-free analytics). Placeholder = analytics off. */
+  analyticsDomain: z.union([z.string().regex(/^[a-z0-9.-]+\.[a-z]{2,}$/), z.string().regex(PLACEHOLDER)]),
+});
+
+/** About and Disclaimer pages (content/pages/<lang>/<page>.mdx). */
+export const pageSchema = z.strictObject({
+  title: text,
+  description: text,
 });
 
 export const moduleSchema = z.strictObject({
@@ -115,7 +123,10 @@ export const quizSchema = z.strictObject({
     .min(1),
 });
 
-const sourceSchema = z.strictObject({ title: text, url: z.url() });
+export const SOURCE_COUNTRIES = ['us', 'il'] as const;
+
+/** An official source a lesson relies on; `country` groups it on the Sources page. */
+const sourceSchema = z.strictObject({ title: text, url: z.url(), country: z.enum(SOURCE_COUNTRIES) });
 
 /**
  * Lesson frontmatter. Published lessons need every field; "coming-soon" stubs
@@ -153,3 +164,4 @@ export type GlossaryEntry = z.infer<typeof glossarySchema>;
 export type Deadline = z.infer<typeof deadlineSchema>;
 export type Quiz = z.infer<typeof quizSchema>;
 export type LessonFrontmatter = z.infer<typeof lessonSchema>;
+export type Page = z.infer<typeof pageSchema>;

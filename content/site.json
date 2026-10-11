@@ -5,5 +5,6 @@
   "reviewerTitleHe": "[HEBREW TEXT]",
   "lastReviewed": "[DATE]",
   "contactEmail": "[CONTACT EMAIL]",
-  "askFormEndpoint": "[FORM ENDPOINT]"
+  "askFormEndpoint": "[FORM ENDPOINT]",
+  "analyticsDomain": "[ANALYTICS DOMAIN]"
 }

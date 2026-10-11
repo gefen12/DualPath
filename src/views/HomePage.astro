@@ -132,7 +132,7 @@ const dependsNames = listFormat.format(ofVerdict('depends').map((p) => p.name));
         <h2 id="quiz-title" class="m-0 mt-2 text-[32px] leading-tight sm:text-[38px]">{t('quiz.title')}</h2>
         <p class="m-0 mt-2.5 text-[17px] leading-normal text-[#C7D0DE]">{t('quiz.intro')}</p>
       </div>
-      <Quiz client:visible quiz={localQuiz} labels={quizLabels} lessons={quizLessons} />
+      <Quiz client:load quiz={localQuiz} labels={quizLabels} lessons={quizLessons} />
     </div>
   </section>
 

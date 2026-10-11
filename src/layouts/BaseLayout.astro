@@ -5,6 +5,7 @@ import Footer from '@/components/Footer.astro';
 import { dirs, languages, defaultLang, type Lang } from '@/i18n/ui';
 import { getLangFromPath, switchLangPath, useTranslations } from '@/i18n/utils';
 import { site } from '@/lib/data';
+import { isPlaceholder } from '@/lib/schemas';
 
 interface Props {
   title?: string;
@@ -23,6 +24,9 @@ const alternates = (Object.keys(languages) as Lang[]).map((l) => ({
   href: new URL(switchLangPath(Astro.url.pathname, l), Astro.site).href,
 }));
 const xDefault = alternates.find((a) => a.lang === defaultLang)!.href;
+const ogImage = new URL(`/og/${lang}.png`, Astro.site).href;
+// Cookie-free analytics, only once a domain is configured in site.json.
+const analyticsDomain = isPlaceholder(site.analyticsDomain) ? undefined : site.analyticsDomain;
 ---
 
 <!doctype html>
@@ -44,6 +48,11 @@ const xDefault = alternates.find((a) => a.lang === defaultLang)!.href;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.href} />
     <meta property="og:locale" content={lang === 'he' ? 'he_IL' : 'en_US'} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {analyticsDomain && <script is:inline defer data-domain={analyticsDomain} src="https://plausible.io/js/script.js"></script>}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

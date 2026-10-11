@@ -13,7 +13,9 @@ Built with Astro + TypeScript, React islands, Tailwind CSS and MDX. It's a stati
 | `npm run dev`     | Local dev server at http://localhost:4321       |
 | `npm run build`   | Type-check (`astro check`) and build to `dist/` |
 | `npm run preview` | Serve the built site                            |
-| `npm test`        | Unit tests (Vitest)                             |
+| `npm test`        | Unit, content and RTL tests (Vitest)            |
+| `npm run test:e2e`| Browser tests on the built site (Playwright + axe accessibility scan) |
+| `npm run og`      | Regenerate the share images in `public/og/`     |
 
 ## Languages
 
@@ -65,6 +67,12 @@ content/
 - **Homepage Allowed vs Avoid** lists come straight from `products.json` verdicts.
 - **Ask form:** set `askFormEndpoint` in `site.json` to a form service URL (e.g. Formspree).
   Until then the form shows that it isn't connected and points to the contact email.
+- **About and Disclaimer** live in `content/pages/<lang>/`. The Hebrew pages show the
+  English text with a note until `content/pages/he/about.mdx` / `disclaimer.mdx` exist.
+- **Sources page** is built from the `sources` of every published lesson, grouped by each
+  source's `country` (`us` or `il`).
+- **Analytics:** set `analyticsDomain` in `site.json` to the domain registered with
+  [Plausible](https://plausible.io) (cookie-free). While it's a placeholder, no analytics load.
 - The build warns when a published lesson's `lastReviewed` is more than 12 months old.
 - Placeholders such as `[CPA NAME]`, `[DATE]` and `[HEBREW TEXT]` stay visible on the
   site until someone fills them in. `grep -rn "\[HEBREW TEXT\]" content` lists the
@@ -75,9 +83,18 @@ content/
 Defined in `src/styles/global.css` (`@theme`) and used as Tailwind classes such as
 `bg-navy`, `text-muted`, `border-line`, `bg-ok-bg text-ok`. Green, red and orange are for verdicts only.
 
+## Tests
+
+- `npm test`: schemas and cross-file links in `/content`, search, quiz rules, deadlines and
+  `.ics` files, browser storage, and a check that layout code only uses RTL-safe classes.
+- `npm run test:e2e` (after `npm run build`): every key page in English and Hebrew loads with
+  the right language and direction, fits a 360px phone and passes an axe WCAG 2.2 AA scan,
+  plus the PRD acceptance checks (quiz path, fund checker searches, checklist, calendar files).
+  Set `CHROMIUM_PATH` to use an already installed Chromium.
+
 ## Deploying
 
-CI (`.github/workflows/ci.yml`) runs tests and the build on every push and pull request.
+CI (`.github/workflows/ci.yml`) builds and runs both test suites on every push and pull request.
 Hosting (Vercel or Netlify) is still an open question. Both detect Astro automatically:
 connect the GitHub repo, keep the build command `npm run build` and output `dist`,
 and set `SITE_URL` to the final domain so canonical, hreflang and sitemap URLs are correct.

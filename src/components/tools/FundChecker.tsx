@@ -91,7 +91,7 @@ export default function FundChecker({ products, labels, otherLang }: Props) {
             <li key={p.id} className="flex flex-col gap-2.5 rounded-card border border-line bg-card px-5 py-5">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <h3 className="m-0 font-sans text-lg leading-snug font-semibold">{p.name}</h3>
+                  <h2 className="m-0 font-sans text-lg leading-snug font-semibold">{p.name}</h2>
                   <p className="text-page-start m-0 mt-0.5 text-[15px] text-muted" lang={otherLang} dir={otherDir}>
                     {p.otherName}
                   </p>

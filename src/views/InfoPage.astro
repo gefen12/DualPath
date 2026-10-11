@@ -1,0 +1,35 @@
+---
+// About and Disclaimer: an MDX page from content/pages, in the page language when
+// it exists, otherwise the English text marked as such.
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { type Lang } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  slug: 'about' | 'disclaimer';
+  lang: Lang;
+}
+
+const { slug, lang } = Astro.props;
+const t = useTranslations(lang);
+// A missing Hebrew file is normal until it's translated, so look entries up quietly.
+const pages = await getCollection('pages');
+const own = pages.find((p) => p.id === `${lang}/${slug}`);
+const entry = own ?? pages.find((p) => p.id === `en/${slug}`);
+if (!entry) throw new Error(`Missing content/pages/en/${slug}.mdx`);
+const fallback = !own;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <article class="mx-auto flex max-w-[760px] flex-col gap-6 px-4 pt-10 pb-16 sm:px-6 sm:pt-12">
+    {fallback && <p class="m-0 rounded-control bg-blue-tint px-4 py-3 text-[15px]">{t('page.notTranslated')}</p>}
+    <div class="flex flex-col gap-6" lang={fallback ? 'en' : lang} dir={fallback ? 'ltr' : undefined}>
+      <h1 class="m-0 text-[34px] leading-[1.08] tracking-tight sm:text-[46px]">{entry.data.title}</h1>
+      <div class="lesson-body">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
