@@ -34,6 +34,7 @@ export const siteSchema = z.strictObject({
   name: text,
   reviewer: text,
   reviewerTitle: text,
+  reviewerTitleHe: text,
   lastReviewed: z.union([isoDate, z.string().regex(PLACEHOLDER)]),
   contactEmail: z.union([z.email(), z.string().regex(PLACEHOLDER)]),
   /** Where the "Ask about a product" form posts (e.g. a Formspree URL). */

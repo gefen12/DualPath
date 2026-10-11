@@ -2,6 +2,7 @@
   "name": "DualPath",
   "reviewer": "[CPA NAME]",
   "reviewerTitle": "US–Israel tax specialist",
+  "reviewerTitleHe": "[HEBREW TEXT]",
   "lastReviewed": "[DATE]",
   "contactEmail": "[CONTACT EMAIL]",
   "askFormEndpoint": "[FORM ENDPOINT]"

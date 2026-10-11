@@ -39,7 +39,7 @@ const totalMinutes = allTimed ? module.lessons.reduce((sum, l) => sum + (l.en.da
       {
         module.lessons.length > 0 && (
           <p class="m-0 text-sm text-muted">
-            {fill(t('learn.lessonsCount'), { n: module.lessons.length })}
+            {module.lessons.length === 1 ? t('learn.lessonsCountOne') : fill(t('learn.lessonsCount'), { n: module.lessons.length })}
             {totalMinutes > 0 && <> · {fill(t('learn.minutes'), { n: totalMinutes })}</>}
           </p>
         )

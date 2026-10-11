@@ -58,6 +58,11 @@ content/
 - **Deadlines** are month + day and repeat yearly. Each one gets an `.ics` file
   (`/deadlines/<id>.ics`, plus `/deadlines/dualpath-deadlines.ics` for all of them) with a
   yearly repeat rule. Hebrew calendar files fall back to English while the Hebrew text is a placeholder.
+- **Quiz:** `quiz.json` lists the questions and the path. Each path step names a lesson
+  and, optionally, `when`: the answers that include it (`{"work": ["salaried"]}`); a step
+  without `when` is always shown. Steps keep their order and each lesson appears once.
+  Answers are saved in the browser.
+- **Homepage Allowed vs Avoid** lists come straight from `products.json` verdicts.
 - **Ask form:** set `askFormEndpoint` in `site.json` to a form service URL (e.g. Formspree).
   Until then the form shows that it isn't connected and points to the contact email.
 - The build warns when a published lesson's `lastReviewed` is more than 12 months old.
