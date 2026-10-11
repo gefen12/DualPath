@@ -13,15 +13,16 @@
     "en": "FATCA (Form 8938)",
     "he": "דיווח FATCA",
     "category": "tax",
-    "definition": "Second report of foreign assets, with the tax return. Abroad: from $200,000 at year end (single).",
-    "definitionHe": "[HEBREW TEXT]"
+    "definition": "Second report of foreign assets, filed with the tax return. If you live abroad and are single: more than $200,000 at year end or more than $300,000 at any time ($400,000 / $600,000 if married filing jointly).",
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "fbar-fatca/form-8938"
   },
   {
     "id": "feie",
     "en": "Foreign Earned Income Exclusion (FEIE)",
     "he": "החרגת הכנסה מעבודה בחו״ל",
     "category": "tax",
-    "definition": "Removes foreign salary from US tax, up to $132,900 for 2026. Can reduce the refundable child tax credit.",
+    "definition": "Removes foreign salary from US tax, up to $132,900 for 2026. If you claim it, you can't get the refundable part of the child tax credit.",
     "definitionHe": "[HEBREW TEXT]",
     "lesson": "us-taxes/feie-or-foreign-tax-credit"
   },
@@ -58,7 +59,8 @@
     "he": "דוח שנתי למס הכנסה",
     "category": "tax",
     "definition": "Not needed by most salaried workers; required in some cases, e.g. a foreign broker.",
-    "definitionHe": "[HEBREW TEXT]"
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "basics/yearly-to-do-list"
   },
   {
     "id": "bituach-leumi",
@@ -66,14 +68,15 @@
     "he": "ביטוח לאומי",
     "category": "tax",
     "definition": "Israel's National Insurance: social security and health tax from salary.",
-    "definitionHe": "[HEBREW TEXT]"
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "israeli-taxes/self-employed-bituach-leumi"
   },
   {
     "id": "new-immigrant",
     "en": "New immigrant / veteran returning resident",
     "he": "עולה חדש / תושב חוזר ותיק",
     "category": "tax",
-    "definition": "10-year Israeli exemption on foreign income; from 2026 it must still be reported.",
+    "definition": "10-year Israeli exemption on foreign income. If you became a resident from January 1, 2026, that income must still be reported.",
     "definitionHe": "[HEBREW TEXT]",
     "lesson": "israeli-taxes/new-olim-2026-reporting"
   },
@@ -83,7 +86,8 @@
     "he": "קרן השתלמות",
     "category": "accounts",
     "definition": "Tax-advantaged savings from you and your employer; US treatment debated.",
-    "definitionHe": "[HEBREW TEXT]"
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "investing/pension-keren-hishtalmut"
   },
   {
     "id": "pension-fund",
@@ -91,7 +95,8 @@
     "he": "קרן פנסיה",
     "category": "accounts",
     "definition": "Mandatory retirement savings through your employer.",
-    "definitionHe": "[HEBREW TEXT]"
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "investing/pension-keren-hishtalmut"
   },
   {
     "id": "kupat-gemel-lehashkaa",
@@ -117,7 +122,8 @@
     "he": "חיסכון לכל ילד",
     "category": "family",
     "definition": "Monthly government savings per child; bank account or kupat gemel track.",
-    "definitionHe": "[HEBREW TEXT]"
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "family/kids-citizenship-ssn"
   },
   {
     "id": "crba",
@@ -125,7 +131,8 @@
     "he": "דיווח על לידה בחו״ל",
     "category": "family",
     "definition": "Records a child born in Israel as a US citizen; first step before passport and SSN.",
-    "definitionHe": "[HEBREW TEXT]"
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "family/kids-citizenship-ssn"
   },
   {
     "id": "ssn",
@@ -133,7 +140,8 @@
     "he": "מספר ביטוח לאומי אמריקאי",
     "category": "family",
     "definition": "US ID number; a child needs one for the child tax credit.",
-    "definitionHe": "[HEBREW TEXT]"
+    "definitionHe": "[HEBREW TEXT]",
+    "lesson": "family/kids-citizenship-ssn"
   },
   {
     "id": "etf",
@@ -191,7 +199,7 @@
     "en": "Foreign securities",
     "he": "ניירות ערך זרים",
     "category": "investing",
-    "definition": "Not traded in Tel Aviv; some Israeli brokers block US citizens from them.",
+    "definition": "Securities not traded in Tel Aviv. Israeli brokers differ in what they let US citizens buy, so ask before you open an account.",
     "definitionHe": "[HEBREW TEXT]"
   },
   {

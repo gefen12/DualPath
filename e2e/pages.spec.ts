@@ -1,13 +1,22 @@
 // Every key page in both languages: loads, has the right language and direction,
 // fits a 360px phone, and passes an automated WCAG 2.2 AA scan.
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
+// Every module page and every lesson, straight from /content, so new lessons are checked too.
+const lessonsDir = join(import.meta.dirname, '..', 'content', 'lessons', 'en');
+const LESSON_PAGES = readdirSync(lessonsDir).flatMap((module) => [
+  `/learn/${module}`,
+  ...readdirSync(join(lessonsDir, module))
+    .filter((f) => f.endsWith('.mdx'))
+    .map((f) => `/learn/${module}/${f.replace(/\.mdx$/, '')}`),
+]);
+
 const PAGES = [
   '/',
-  '/learn/investing',
-  '/learn/investing/israeli-funds-trap',
-  '/learn/basics/yearly-to-do-list',
+  ...LESSON_PAGES,
   '/fund-checker',
   '/glossary',
   '/deadlines',

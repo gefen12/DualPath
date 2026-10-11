@@ -45,6 +45,10 @@ export const ui = {
     'learn.reviewedBy': 'Reviewed by {name}',
     'learn.lastReviewed': 'Last reviewed {date}',
     'learn.inShort': 'In short',
+    'learn.draftTitle': 'Draft — not yet reviewed by a CPA',
+    'learn.draftBody':
+      'This lesson was written from the official sources listed at the end, but a US–Israel tax professional hasn’t checked it yet. Use it to learn the topic, not to make decisions.',
+    'learn.sourcesChecked': 'Sources checked {date}',
     'learn.comingSoon': 'Coming soon',
     'learn.comingSoonBody': 'This lesson is being written and reviewed. Check back soon.',
     'learn.notTranslated': 'This lesson isn’t available in English yet.',
@@ -201,6 +205,10 @@ export const ui = {
     'learn.reviewedBy': 'נבדק על ידי {name}',
     'learn.lastReviewed': 'נבדק לאחרונה {date}',
     'learn.inShort': 'בקצרה',
+    'learn.draftTitle': 'טיוטה — עדיין לא נבדקה על ידי רואה חשבון',
+    'learn.draftBody':
+      'השיעור נכתב על סמך המקורות הרשמיים שמופיעים בסופו, אבל איש מקצוע במיסוי ארה״ב–ישראל עוד לא בדק אותו. השתמשו בו כדי ללמוד את הנושא, לא כדי לקבל החלטות.',
+    'learn.sourcesChecked': 'המקורות נבדקו ב־{date}',
     'learn.comingSoon': 'בקרוב',
     'learn.comingSoonBody': 'השיעור הזה בכתיבה ובבדיקה. חזרו בקרוב.',
     'learn.notTranslated': 'השיעור הזה עדיין לא תורגם לעברית.',

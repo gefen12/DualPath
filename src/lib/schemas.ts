@@ -143,6 +143,11 @@ export const lessonSchema = z
     summary: text.optional(),
     lastReviewed: z.coerce.date().optional(),
     reviewer: text.optional(),
+    /**
+     * True once a CPA has signed off. Until then the lesson shows a "Draft" banner
+     * and `lastReviewed` means "sources last checked", not "reviewed by a CPA".
+     */
+    cpaReviewed: z.boolean().default(false),
     sources: z.array(sourceSchema).optional(),
   })
   .superRefine((lesson, ctx) => {

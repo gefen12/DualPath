@@ -130,6 +130,13 @@ describe('lesson files', () => {
     }
   });
 
+  it('link only to lessons that exist', () => {
+    for (const l of lessons) {
+      const links = [...l.body.matchAll(/\]\((\/learn\/[^)#\s]+)/g)].map((m) => m[1]!.replace(/^\/learn\//, '').replace(/\/$/, ''));
+      expect(links.filter((ref) => !enByRef.has(ref)), l.path).toEqual([]);
+    }
+  });
+
   it('use only callout types warning and info', () => {
     for (const l of lessons) {
       const types = [...l.body.matchAll(/<Callout\b[^>]*\btype="([^"]*)"/g)].map((m) => m[1]);

@@ -73,6 +73,9 @@ content/
   source's `country` (`us` or `il`).
 - **Analytics:** set `analyticsDomain` in `site.json` to the domain registered with
   [Plausible](https://plausible.io) (cookie-free). While it's a placeholder, no analytics load.
+- **CPA review:** lessons default to `cpaReviewed: false`, which shows a "Draft — not yet
+  reviewed by a CPA" banner and treats `lastReviewed` as "sources checked". When a CPA signs off,
+  set `cpaReviewed: true`, `reviewer` and `lastReviewed`. See `docs/content-review.md`.
 - The build warns when a published lesson's `lastReviewed` is more than 12 months old.
 - Placeholders such as `[CPA NAME]`, `[DATE]` and `[HEBREW TEXT]` stay visible on the
   site until someone fills them in. `grep -rn "\[HEBREW TEXT\]" content` lists the

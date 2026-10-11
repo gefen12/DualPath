@@ -131,8 +131,48 @@
   .lesson-body > :is(ul, ol) > li + li {
     margin-top: 8px;
   }
+  /* Links inside running text are underlined, not told apart by color alone. */
+  .lesson-body a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
   .lesson-body strong {
     font-weight: 600;
+    color: var(--color-navy);
+  }
+}
+
+/* Markdown tables in lessons: scroll inside their own box on narrow screens. */
+@layer components {
+  .lesson-body > table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 15px;
+    line-height: 1.5;
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: 14px;
+  }
+  .lesson-body > table :is(th, td) {
+    padding: 10px 14px;
+    text-align: start;
+    vertical-align: top;
+    border-top: 1px solid #eef1f5;
+  }
+  .lesson-body > table thead th {
+    border-top: 0;
+    background: #f0f3f7;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .lesson-body > table td:first-child {
+    font-weight: 600;
+    white-space: nowrap;
     color: var(--color-navy);
   }
 }
