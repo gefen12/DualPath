@@ -6,7 +6,7 @@ import Quiz, { type QuizLabels, type QuizLesson } from '@/components/home/Quiz';
 import { type Lang } from '@/i18n/ui';
 import { fill, localizePath, useTranslations } from '@/i18n/utils';
 import { getAllLessons, getCourse, lessonPath, lessonTitles, modulePath, moduleTitles } from '@/lib/course';
-import { quiz, site } from '@/lib/data';
+import { quiz } from '@/lib/data';
 import { upcoming } from '@/lib/deadlines';
 import { verdictStyles } from '@/lib/verdicts';
 
@@ -87,9 +87,7 @@ const dependsNames = listFormat.format(ofVerdict('depends').map((p) => p.name));
           {t('home.ctaBrowse')}
         </a>
       </div>
-      <p class="m-0 text-sm text-muted">
-        {fill(t('home.reviewed'), { name: site.reviewer, title: he ? site.reviewerTitleHe : site.reviewerTitle, date: site.lastReviewed })}
-      </p>
+      <p class="m-0 text-sm text-muted">{t('home.notAdvice')}</p>
     </div>
 
     <section aria-labelledby="calendar-title" class="flex flex-col gap-4 rounded-card border border-line bg-card p-6 shadow-hero sm:p-7">

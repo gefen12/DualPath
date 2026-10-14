@@ -31,6 +31,8 @@ export interface CheckerLabels {
   count: string;
   countOne: string;
   spot: string;
+  noticeTitle: string;
+  noticeBody: string;
   readLesson: string;
   emptyTitle: string;
   emptyBody: string;
@@ -84,6 +86,20 @@ export default function FundChecker({ products, labels, otherLang }: Props) {
           { value: 'depends', label: labels.verdicts.depends },
         ]}
       />
+
+      <div
+        role="note"
+        aria-label={labels.noticeTitle}
+        className="flex items-start gap-3.5 rounded-[14px] border-2 border-depends bg-depends-bg px-5 py-4 text-[#6B3307]"
+      >
+        <svg className="mt-0.5 shrink-0 text-depends" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" />
+        </svg>
+        <div className="flex flex-col gap-1">
+          <p className="m-0 text-base font-bold text-[#5A2A06]">{labels.noticeTitle}</p>
+          <p className="m-0 text-[15px] leading-normal">{labels.noticeBody}</p>
+        </div>
+      </div>
 
       {results.length > 0 ? (
         <ul className="m-0 grid list-none gap-3.5 p-0 md:grid-cols-2 xl:grid-cols-3">

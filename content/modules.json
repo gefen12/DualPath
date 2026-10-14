@@ -5,7 +5,7 @@
     "title": "Start here: the basics",
     "titleHe": "מתחילים כאן",
     "description": "What you must do every year, and how to catch up if you never filed.",
-    "descriptionHe": "[HEBREW TEXT]"
+    "descriptionHe": "מה חייבים לעשות בכל שנה, ואיך להשלים את מה שפספסתם אם מעולם לא הגשתם."
   },
   {
     "id": "us-taxes",
@@ -13,7 +13,7 @@
     "title": "US taxes from Israel",
     "titleHe": "מס ארה״ב מישראל",
     "description": "Form 1040, FEIE vs tax credit, child tax credit, filing options.",
-    "descriptionHe": "[HEBREW TEXT]"
+    "descriptionHe": "טופס 1040, FEIE מול זיכוי מס זר, זיכוי מס בגין ילדים ואפשרויות ההגשה."
   },
   {
     "id": "fbar-fatca",
@@ -21,7 +21,7 @@
     "title": "FBAR and FATCA",
     "titleHe": "דיווח על חשבונות",
     "description": "Which accounts count and a step-by-step FBAR walkthrough.",
-    "descriptionHe": "[HEBREW TEXT]"
+    "descriptionHe": "אילו חשבונות נספרים, ומדריך FBAR צעד אחר צעד."
   },
   {
     "id": "israeli-taxes",
@@ -29,7 +29,7 @@
     "title": "Israeli taxes for Americans",
     "titleHe": "מס הכנסה בישראל",
     "description": "Oleh benefits, the 2026 change, when to file, RSUs.",
-    "descriptionHe": "[HEBREW TEXT]"
+    "descriptionHe": "הטבות לעולים, השינוי של 2026, מתי מגישים דוח שנתי, ו־RSU."
   },
   {
     "id": "banking",
@@ -37,7 +37,7 @@
     "title": "Bank accounts: what for what",
     "titleHe": "איזה חשבון למה",
     "description": "Israeli vs US banks, moving money, US credit cards.",
-    "descriptionHe": "[HEBREW TEXT]"
+    "descriptionHe": "בנק ישראלי מול בנק אמריקאי, העברת כסף וכרטיסי אשראי אמריקאיים."
   },
   {
     "id": "investing",
@@ -45,7 +45,7 @@
     "title": "Investing safely",
     "titleHe": "השקעות בטוחות",
     "description": "PFICs, choosing a broker, simple portfolios.",
-    "descriptionHe": "[HEBREW TEXT]"
+    "descriptionHe": "PFIC, בחירת ברוקר ותיקי השקעות פשוטים."
   },
   {
     "id": "family",
@@ -53,6 +53,6 @@
     "title": "Family and life events",
     "titleHe": "משפחה ואירועי חיים",
     "description": "Kids, a non-American spouse, pension and inheritance.",
-    "descriptionHe": "[HEBREW TEXT]"
+    "descriptionHe": "ילדים, בן או בת זוג שאינם אמריקאים, פנסיה וירושה."
   }
 ]

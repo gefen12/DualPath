@@ -4,44 +4,44 @@
     "month": 4,
     "day": 15,
     "title": "Pay any US tax owed",
-    "titleHe": "[HEBREW TEXT]",
+    "titleHe": "תשלום המס האמריקאי",
     "note": "Interest runs from here, even with the extension",
-    "noteHe": "[HEBREW TEXT]"
+    "noteHe": "הריבית נצברת מהתאריך הזה, גם אם קיבלתם הארכה להגשה"
   },
   {
     "id": "israeli-annual-return",
     "month": 4,
     "day": 30,
     "title": "Israeli annual return (if required)",
-    "titleHe": "[HEBREW TEXT]",
+    "titleHe": "דוח שנתי למס הכנסה בישראל (אם נדרש)",
     "note": "Only if you must file. Often extended: for 2025 returns it moved to May 31 (or June 30 for online filers). Confirm each year.",
-    "noteHe": "[HEBREW TEXT]"
+    "noteHe": "רק אם חלה עליכם חובת הגשה. המועד נדחה לעיתים קרובות: לדוחות 2025 הוא נדחה ל־31 במאי (או ל־30 ביוני למגישים באופן מקוון). כדאי לבדוק בכל שנה."
   },
   {
     "id": "us-return",
     "month": 6,
     "day": 15,
     "title": "US return (Form 1040)",
-    "titleHe": "[HEBREW TEXT]",
+    "titleHe": "הגשת הדוח האמריקאי (טופס 1040)",
     "note": "Automatic 2-month extension for those abroad",
-    "noteHe": "[HEBREW TEXT]"
+    "noteHe": "הארכה אוטומטית של חודשיים למי שגר מחוץ לארה״ב"
   },
   {
     "id": "fbar-extended-1040",
     "month": 10,
     "day": 15,
     "title": "FBAR and extended Form 1040",
-    "titleHe": "[HEBREW TEXT]",
+    "titleHe": "FBAR וטופס 1040 בהארכה",
     "note": "FBAR is extended automatically; 1040 needs Form 4868 by June 15",
-    "noteHe": "[HEBREW TEXT]"
+    "noteHe": "ה־FBAR מוארך אוטומטית; לטופס 1040 צריך להגיש טופס 4868 עד 15 ביוני"
   },
   {
     "id": "note-balances",
     "month": 12,
     "day": 31,
     "title": "Note highest account balances",
-    "titleHe": "[HEBREW TEXT]",
+    "titleHe": "רישום היתרה הגבוהה בכל חשבון",
     "note": "Needed for next year's FBAR",
-    "noteHe": "[HEBREW TEXT]"
+    "noteHe": "תצטרכו אותה לדוח ה־FBAR של השנה הבאה"
   }
 ]

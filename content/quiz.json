@@ -3,66 +3,66 @@
     {
       "id": "moved",
       "label": "When did you start living in Israel?",
-      "labelHe": "[HEBREW TEXT]",
+      "labelHe": "מתי התחלתם לגור בישראל?",
       "answers": [
         {
           "id": "born",
           "label": "I was born here",
-          "labelHe": "[HEBREW TEXT]"
+          "labelHe": "נולדתי כאן"
         },
         {
           "id": "before-2026",
           "label": "Before 2026",
-          "labelHe": "[HEBREW TEXT]"
+          "labelHe": "לפני 2026"
         },
         {
           "id": "2026-or-later",
           "label": "2026 or later",
-          "labelHe": "[HEBREW TEXT]"
+          "labelHe": "ב־2026 או אחר כך"
         }
       ]
     },
     {
       "id": "filed",
       "label": "Have you filed US tax returns?",
-      "labelHe": "[HEBREW TEXT]",
+      "labelHe": "הגשתם דוחות מס לארה״ב?",
       "answers": [
         {
           "id": "every-year",
           "label": "Yes, every year",
-          "labelHe": "[HEBREW TEXT]"
+          "labelHe": "כן, בכל שנה"
         },
         {
           "id": "some-years",
           "label": "Some years",
-          "labelHe": "[HEBREW TEXT]"
+          "labelHe": "בחלק מהשנים"
         },
         {
           "id": "never",
           "label": "Never",
-          "labelHe": "[HEBREW TEXT]"
+          "labelHe": "אף פעם"
         }
       ]
     },
     {
       "id": "work",
       "label": "How do you earn money?",
-      "labelHe": "[HEBREW TEXT]",
+      "labelHe": "ממה אתם מתפרנסים?",
       "answers": [
         {
           "id": "salaried",
           "label": "Salaried",
-          "labelHe": "[HEBREW TEXT]"
+          "labelHe": "שכיר/ה"
         },
         {
           "id": "self-employed",
           "label": "Self-employed (Atzmai)",
-          "labelHe": "[HEBREW TEXT]"
+          "labelHe": "עצמאי/ת"
         },
         {
           "id": "student-soldier",
           "label": "Student / soldier",
-          "labelHe": "[HEBREW TEXT]"
+          "labelHe": "סטודנט/ית או חייל/ת"
         }
       ]
     }
