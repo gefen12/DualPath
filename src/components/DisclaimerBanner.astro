@@ -1,0 +1,24 @@
+---
+// Site-wide notice at the top of every page: not advice, no responsibility for mistakes.
+import { type Lang } from '@/i18n/ui';
+import { localizePath, useTranslations } from '@/i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<aside aria-label={t('banner.label')} class="border-b border-[#F2C9A5] bg-depends-bg text-[#6B3307]">
+  <div class="mx-auto flex max-w-[1180px] items-start gap-2.5 px-4 py-2.5 text-[13px] leading-snug sm:px-6 sm:text-sm">
+    <svg class="mt-px shrink-0 text-depends" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"></path></svg>
+    <p class="m-0">
+      {t('banner.text')}{' '}
+      <a href={localizePath('/disclaimer', lang)} class="font-semibold whitespace-nowrap text-[#6B3307] underline underline-offset-2 hover:text-navy">
+        {t('footer.fullDisclaimer')}
+      </a>
+    </p>
+  </div>
+</aside>

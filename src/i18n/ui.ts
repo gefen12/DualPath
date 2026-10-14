@@ -34,6 +34,9 @@ export const ui = {
     'footer.sources': 'Sources',
     'footer.contact': 'Contact',
     'footer.fullDisclaimer': 'Full disclaimer',
+    'banner.label': 'Important notice',
+    'banner.text':
+      'General education only — not financial, tax or legal advice. DualPath isn’t responsible for mistakes on this site or for decisions you make based on it. Check your situation with a qualified professional.',
     'learn.courses': 'Courses',
     'learn.breadcrumb': 'Breadcrumb',
     'learn.module': 'Module {n}',
@@ -194,6 +197,9 @@ export const ui = {
     'footer.sources': 'מקורות',
     'footer.contact': 'יצירת קשר',
     'footer.fullDisclaimer': 'הבהרה משפטית מלאה',
+    'banner.label': 'הודעה חשובה',
+    'banner.text':
+      'מידע כללי ללימוד בלבד — לא ייעוץ פיננסי, ייעוץ מס או ייעוץ משפטי. DualPath אינו אחראי לטעויות באתר או להחלטות שתקבלו על סמך המידע בו. בדקו את המצב שלכם מול איש מקצוע מוסמך.',
     'learn.courses': 'קורסים',
     'learn.breadcrumb': 'נתיב ניווט',
     'learn.module': 'מודול {n}',
