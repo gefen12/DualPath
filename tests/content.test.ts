@@ -44,7 +44,8 @@ function walk(dir: string): string[] {
 
 const lessonsDir = join(root, 'lessons');
 const lessons: LessonFile[] = walk(lessonsDir).map((path) => {
-  const source = readFileSync(path, 'utf8');
+  // Normalize Windows line endings (Git may check files out with CRLF).
+  const source = readFileSync(path, 'utf8').replace(/\r\n/g, '\n');
   const match = /^---\n([\s\S]*?)\n---\n?([\s\S]*)$/.exec(source);
   if (!match) throw new Error(`${path}: missing frontmatter`);
   const result = lessonSchema.safeParse(parseYaml(match[1]!));
